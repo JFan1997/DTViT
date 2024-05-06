@@ -18,6 +18,8 @@ import time
 from torch.utils.data import random_split
 from plot_image import plot_image
 from models.transformer import DualVisionTransformer
+from torch.utils.tensorboard import SummaryWriter
+
 from torchvision.transforms import (CenterCrop, 
                                     Compose, 
                                     Normalize,
@@ -78,13 +80,15 @@ def load_dataset(data_argumentation=False):
     return train_dataset,test_dataset
 
 
-def train(num_epochs = 50, data_argumentation=False,batch_size=8,model=0):
+def train(num_epochs = 50, data_argumentation=False,batch_size=8,model_type=0,pretrained=True,optimizer_type=0):
+    experiment_name="dataset2-epoche_{}-unfreeze_{}-pretrained_{}-argumentation_{}-batch_size_{}-optimizer_type-{}".format(num_epochs, model_type, pretrained,data_argumentation,batch_size,optimizer_type)
+    writer = SummaryWriter('./runs/{}/'.format(experiment_name))
     train_dataset,test_dataset=load_dataset(data_argumentation=data_argumentation)
     print("train_dataset",len(train_dataset))
     print("test_dataset",len(test_dataset))
     train_dataloader = DataLoader(train_dataset,batch_size=batch_size)
     test_dataloader = DataLoader(test_dataset,batch_size=batch_size)
-    if model == 0:
+    if model_type == 0:
         model = DualVisionTransformer(
                 image_size=224,
                 patch_size=16,
@@ -96,14 +100,15 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model=0):
                 attention_dropout=0.1,
                 num_classe1=2,
                 num_classe2=4,
+                pretrained=pretrained
             )
-    elif model == 1:
-        model= DualResNet(num_class1=2,num_class2=4)
+    elif model_type == 1:
+        model= DualResNet(num_class1=2,num_class2=4,pretrained=pretrained)
     model.to(device)
-
-
-    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
-
+    if optimizer_type == 0:
+        optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+    elif optimizer_type == 1:
+        optimizer = optim.Adam(model.parameters(), lr=0.001)
     start_time = time.time() #(for showing time)
     for epoch in range(num_epochs): #(loop for every epoch)
         print("Epoch {} running".format(epoch)) #(printing message)
@@ -132,7 +137,7 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model=0):
             loss1 = criterion1(pre_labels1,labels1)
             loss2=criterion2(pre_labels2,labels2)
             # 两个分类loss之和
-            loss=loss1+loss2
+            loss=0.5*loss1+0.5*loss2
             # print("loss",loss)
             # get loss value and update the network weights
             loss.backward()
@@ -147,7 +152,9 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model=0):
         epoch_loss = running_loss / len(train_dataset)
         epoch_acc = running_corrects / (len(train_dataset)*2) * 100.
         current_time = datetime.datetime.now()
-
+        # writer.add_scalar('Training Loss', epoch_loss, epoch)
+        writer.add_scalar('Training Loss', epoch_loss, epoch)
+        writer.add_scalar('Training Accuracy', epoch_acc, epoch)
         print('Current time: {} [Train #{}] Loss: {:.4f} Acc: {:.4f}% Time: {:.4f}s'.format(current_time,epoch, epoch_loss, epoch_acc, time.time() -start_time))
         
         # """ Testing Phase """
@@ -167,23 +174,31 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model=0):
     # 
                 loss1 = criterion1(outputs1, labels1)
                 loss2 = criterion2(outputs2, labels2)
-                loss = loss1 + loss2
+                loss = 0.5*loss1 + 0.5* loss2
+                # 迄今为止的loss
                 running_loss += loss.item() * image.size(0)
 
                 running_corrects += torch.sum(preds1 == labels1.data)
                 running_corrects += torch.sum(preds2 == labels2.data)
-
+            # 当前dataset的平均loss for each item
             epoch_loss = running_loss / len(test_dataset)
             epoch_acc = running_corrects / (2*len(test_dataset))* 100
+            writer.add_scalar('Validation Loss', epoch_loss, epoch)
+            writer.add_scalar('Validation Accuracy', epoch_acc, epoch)
             print('[Test #{}] Loss: {:.4f} Acc: {:.4f}% Time: {:.4f}s'.format(epoch, epoch_loss, epoch_acc, time.time()- start_time))
-    save_path = 'dataset2-{}-vit_unfreeze_pretrained-{}-{}.pth'.format(num_epochs,data_argumentation,batch_size)
+    model_name=None
+    if model_type==0:
+        model_name = 'vit'
+    elif model_type==1:
+        model_name = 'resnet'
+    save_path = './trained_models/{}.pth'.format(experiment_name)
     torch.save(model.state_dict(), save_path)
 
 
 def test():
     test_dataloader = DataLoader(test_dataset,batch_size=8)
     train_dataset,test_dataset=load_dataset()
-    save_path = 'dataset2-50-vit_unfreeze_pretrained.pth'
+    save_path = './trained_models/dataset2-50-vit_unfreeze_pretrained.pth'
     model = DualVisionTransformer(
         image_size=224,
         patch_size=16,
@@ -212,10 +227,14 @@ def test():
             outputs1,outputs2  = model(image)
             _, preds1 = torch.max(outputs1, 1)
             _, preds2 = torch.max(outputs2, 1)
+            # batch loss
             loss1 = criterion1(outputs1, labels1)
             loss2 = criterion2(outputs2, labels2)
+            # loss = loss1 + loss2
             loss = loss1 + loss2
+            # total loss
             running_loss += loss.item() * image.size(0)
+
             running_corrects += torch.sum(preds1 == labels1.data)
             running_corrects += torch.sum(preds2 == labels2.data)
             if index == 0:
@@ -233,4 +252,5 @@ if __name__ == '__main__':
     print("num_epochs",args.num_epochs)
     print("batch_size",args.batch_size)
     print("model",args.model)
-    train(num_epochs=args.num_epochs, data_argumentation= args.data_argument,batch_size=args.batch_size,model=args.model)
+    print("pretrained",args.pretrained)
+    train(num_epochs=args.num_epochs, data_argumentation= args.data_argument,batch_size=args.batch_size,model_type=args.model,pretrained=args.pretrained)

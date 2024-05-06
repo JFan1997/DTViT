@@ -4,9 +4,9 @@ import torch.nn as nn
 import torch
 
 class DualResNet(nn.Module):
-    def __init__(self, num_class1=2, num_class2=3):
+    def __init__(self, num_class1=2, num_class2=3,pretrained=True):
         super(DualResNet, self).__init__()
-        self.backbone=resnet18(pretrained=True)
+        self.backbone=resnet18(pretrained=pretrained)
         self.encoder=nn.Sequential(*list(self.backbone.children())[:-1])
         self.fc1=nn.Linear(512, num_class1)
         self.fc2=nn.Linear(512, num_class2)

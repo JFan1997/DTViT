@@ -102,6 +102,7 @@ class DualVisionTransformer(nn.Module):
         representation_size: Optional[int] = None,
         norm_layer: Callable[..., torch.nn.Module] = partial(nn.LayerNorm, eps=1e-6),
         conv_stem_configs: Optional[List[ConvStemConfig]] = None,
+        pretrained=True,
     ):
         super().__init__()
         _log_api_usage_once(self)
