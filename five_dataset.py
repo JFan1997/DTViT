@@ -30,6 +30,7 @@ from torchvision.transforms import (CenterCrop,
 # print("Image std: ", image_std)
 
 normalize = Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])
+# 
 _train_transforms = Compose(
         [
             Resize(256),
@@ -148,5 +149,5 @@ class MyDataset(Dataset):
 
 
 if __name__ == "__main__":
-    data_dir = '/home/jialiangfan/head_blood/dataset2'
+    data_dir = '/home/jialiangfan/head_blood/dataset'
     dataset = MyDataset(data_dir,balance=True)
