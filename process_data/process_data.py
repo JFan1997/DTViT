@@ -14,5 +14,5 @@ def convert_dcm_to_jpg(folder_path):
                 jpg_image.save(jpg_path)
 
 # Usage example
-folder_path = "/disk2/jialiangfan/dataset/medical_data/2018/信 729047/1"
+folder_path = "/disk2/fjl2401/dataset/medical_data/2018/信 729047/1"
 convert_dcm_to_jpg(folder_path)

@@ -38,7 +38,7 @@ criterion2 = nn.CrossEntropyLoss()  #(set loss function)
 
 
 def load_dataset(data_argumentation=False): 
-    data_dir='/home/jialiangfan/head_blood/dataset'
+    data_dir='/home/fjl2401/head_blood/dataset'
     dataset=MyDataset(data_dir,balance=data_argumentation)
     train_size = int(0.8 * len(dataset))
      
@@ -159,7 +159,7 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model_type=0,pr
             writer.add_scalar('Validation Loss', epoch_loss, epoch)
             writer.add_scalar('Validation Accuracy', epoch_acc, epoch)
             print('[Test #{}] Loss: {:.4f} Acc: {:.4f}% Time: {:.4f}s'.format(epoch, epoch_loss, epoch_acc, time.time()- start_time))
-    save_path = '/disk2/jialiangfan/trained_models/{}.pth'.format(experiment_name)
+    save_path = '/disk2/fjl2401/trained_models/{}.pth'.format(experiment_name)
     torch.save(model.state_dict(), save_path)
 
 

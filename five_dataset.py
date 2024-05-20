@@ -149,5 +149,5 @@ class MyDataset(Dataset):
 
 
 if __name__ == "__main__":
-    data_dir = '/home/jialiangfan/head_blood/dataset'
+    data_dir = '/home/fjl2401/head_blood/dataset'
     dataset = MyDataset(data_dir,balance=True)

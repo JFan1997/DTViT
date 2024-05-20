@@ -29,8 +29,6 @@ class EncoderBlock(nn.Module):
         self.self_attention = nn.MultiheadAttention(hidden_dim, num_heads, dropout=attention_dropout, batch_first=True)
         self.dropout = nn.Dropout(dropout)
 
-        # MLP bl`DualVisionTransformer` is a custom model class that represents a dual-headed Vision Transformer neural network architecture. It is used for multi-task learning where the model has two separate output heads, each predicting different classes. The architecture includes parameters such as image size, patch size, number of layers, number of heads, hidden dimensions, MLP dimensions, dropout rates, and attention dropout rates. The model is designed to process image data and make predictions for two different classification tasks simultaneously.
-        ock
         self.ln_2 = norm_layer(hidden_dim)
         self.mlp = MLPBlock(hidden_dim, mlp_dim, dropout)
 

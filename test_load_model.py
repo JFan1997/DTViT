@@ -90,5 +90,5 @@ if __name__ == '__main__':
     # 
     model_name="dataset2-epoche_1-model_type_0-pretrained_False-argumentation_True-batch_size_32-optimizer_type-0.pth"
     model_name="dataset2-epoche_50-model_type_0-pretrained_True-argumentation_True-batch_size_32-optimizer_type-0.pth"
-    model_path = '/disk2/jialiangfan/trained_models/{}'.format(model_name)
+    model_path = '/disk2/fjl2401/trained_models/{}'.format(model_name)
     test(model_path,model_type=args.model)

@@ -12,6 +12,8 @@
 
 ## 运行指令
 
+## using adam as the optimizer 
+
 ### 测试vit模型
 有数据增强：nohup python main.py --data_argument True --batch_size 32 --num_epochs 50 
 没数据增强：nohup python main.py --data_argument False --batch_size 8 --num_epochs 50
