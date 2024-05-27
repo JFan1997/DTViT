@@ -1,11 +1,7 @@
-from pathlib import Path
-
-data_dir="./dataset"
-
-for x in Path(data_dir).iterdir():
-    print(x)
 
 
-for x in Path(data_dir).rglob('*'):
-    if x.is_dir():  # 检查是否为目录
-        print(x)
+from transformers.integrations import get_available_reporting_integrations
+
+res=get_available_reporting_integrations()
+
+print(res)

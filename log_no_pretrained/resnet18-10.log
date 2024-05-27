@@ -1,0 +1,60 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+data_argument True
+num_epochs 10
+batch_size 32
+model 1
+pretrained False
+optimizer_type 2
+device 1
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+Epoch 0 running
+Current time: 2024-05-20 23:20:38.832536 [Train #0] Loss: 0.8769 Acc: 80.9592% Time: 58.3422s
+[Test #0] Loss: 0.4946 Acc: 89.9239% Time: 64.3688s
+Epoch 1 running
+Current time: 2024-05-20 23:21:43.185823 [Train #1] Loss: 0.4136 Acc: 92.0772% Time: 122.6953s
+[Test #1] Loss: 0.2674 Acc: 95.2680% Time: 128.6707s
+Epoch 2 running
+Current time: 2024-05-20 23:22:48.968051 [Train #2] Loss: 0.2424 Acc: 95.8597% Time: 188.4775s
+[Test #2] Loss: 0.1703 Acc: 96.9060% Time: 194.4086s
+Epoch 3 running
+Current time: 2024-05-20 23:23:53.159676 [Train #3] Loss: 0.1664 Acc: 97.3446% Time: 252.6692s
+[Test #3] Loss: 0.1028 Acc: 98.3620% Time: 258.5995s
+Epoch 4 running
+Current time: 2024-05-20 23:24:57.449116 [Train #4] Loss: 0.1232 Acc: 98.0477% Time: 316.9586s
+[Test #4] Loss: 0.0915 Acc: 98.4117% Time: 324.3639s
+Epoch 5 running
+Current time: 2024-05-20 23:26:03.706277 [Train #5] Loss: 0.0961 Acc: 98.5234% Time: 383.2158s
+[Test #5] Loss: 0.0799 Acc: 98.5936% Time: 389.1266s
+Epoch 6 running
+Current time: 2024-05-20 23:27:09.274246 [Train #6] Loss: 0.0796 Acc: 98.7798% Time: 448.7837s
+[Test #6] Loss: 0.0655 Acc: 98.9907% Time: 454.7173s
+Epoch 7 running
+Current time: 2024-05-20 23:28:14.925332 [Train #7] Loss: 0.0632 Acc: 99.0280% Time: 514.4350s
+[Test #7] Loss: 0.0706 Acc: 98.9080% Time: 521.2217s
+Epoch 8 running
+Current time: 2024-05-20 23:29:20.657886 [Train #8] Loss: 0.0540 Acc: 99.1935% Time: 580.1674s
+[Test #8] Loss: 0.0638 Acc: 98.9576% Time: 586.1091s
+Epoch 9 running
+Current time: 2024-05-20 23:30:25.468940 [Train #9] Loss: 0.0482 Acc: 99.2844% Time: 644.9786s
+[Test #9] Loss: 0.0554 Acc: 99.0735% Time: 653.3320s

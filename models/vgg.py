@@ -1,13 +1,17 @@
 from torchvision.models.resnet import ResNet, BasicBlock, Bottleneck
-from torchvision.models import vgg16_bn
+from torchvision.models import vgg16_bn,VGG16_BN_Weights,vgg11_bn,vgg16,vgg13_bn
 import torch.nn as nn
 import torch
 
 
 class DualVgg16(nn.Module):
-    def __init__(self, num_class1=2, num_class2=3, pretrained=True):
+    def __init__(self, num_class1=2, num_class2=4, pretrained=True):
         super(DualVgg16, self).__init__()
-        self.backbone = vgg16_bn(pretrained=True)
+        # self.backbone = vgg16(pretrained=pretrained)
+        # self.backbone = vgg13_bn(pretrained=pretrained)
+        # self.backbone = vgg16_bn(pretrained=pretrained)
+        self.backbone = vgg16_bn(pretrained=pretrained)
+
         self.encoder = nn.Sequential(*list(self.backbone.children())[:-1])
         self.classifier1 = nn.Sequential(
              nn.Flatten(),

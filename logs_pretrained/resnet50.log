@@ -1,0 +1,62 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /home/jialiangfan/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+data_argument True
+num_epochs 10
+batch_size 32
+model_type: ResNet50
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 1
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+  0%|          | 0.00/97.8M [00:00<?, ?B/s]  1%|▏         | 1.25M/97.8M [00:00<00:07, 13.1MB/s]  3%|▎         | 3.00M/97.8M [00:00<00:06, 15.7MB/s]  5%|▍         | 4.62M/97.8M [00:00<00:06, 16.1MB/s]  7%|▋         | 6.38M/97.8M [00:00<00:05, 16.6MB/s]  8%|▊         | 8.12M/97.8M [00:00<00:05, 16.9MB/s] 10%|█         | 9.88M/97.8M [00:00<00:05, 17.1MB/s] 12%|█▏        | 11.6M/97.8M [00:00<00:05, 17.2MB/s] 14%|█▎        | 13.4M/97.8M [00:00<00:05, 17.3MB/s] 15%|█▌        | 15.1M/97.8M [00:00<00:05, 17.1MB/s] 17%|█▋        | 16.9M/97.8M [00:01<00:04, 17.4MB/s] 19%|█▉        | 18.6M/97.8M [00:01<00:04, 17.2MB/s] 21%|██        | 20.4M/97.8M [00:01<00:04, 17.2MB/s] 23%|██▎       | 22.1M/97.8M [00:01<00:04, 17.2MB/s] 24%|██▍       | 23.9M/97.8M [00:01<00:04, 17.2MB/s] 26%|██▌       | 25.6M/97.8M [00:01<00:04, 17.3MB/s] 28%|██▊       | 27.4M/97.8M [00:01<00:04, 17.2MB/s] 30%|██▉       | 29.1M/97.8M [00:01<00:04, 17.3MB/s] 32%|███▏      | 30.9M/97.8M [00:01<00:04, 17.4MB/s] 33%|███▎      | 32.6M/97.8M [00:02<00:03, 17.4MB/s] 35%|███▌      | 34.4M/97.8M [00:02<00:03, 17.2MB/s] 37%|███▋      | 36.1M/97.8M [00:02<00:03, 17.3MB/s] 39%|███▊      | 37.9M/97.8M [00:02<00:03, 17.3MB/s] 41%|████      | 39.6M/97.8M [00:02<00:03, 17.5MB/s] 42%|████▏     | 41.4M/97.8M [00:02<00:03, 17.4MB/s] 44%|████▍     | 43.1M/97.8M [00:02<00:03, 17.2MB/s] 46%|████▌     | 44.9M/97.8M [00:02<00:03, 17.3MB/s] 48%|████▊     | 46.6M/97.8M [00:02<00:03, 17.2MB/s] 49%|████▉     | 48.4M/97.8M [00:02<00:03, 17.1MB/s] 51%|█████▏    | 50.1M/97.8M [00:03<00:02, 17.2MB/s] 53%|█████▎    | 51.9M/97.8M [00:03<00:02, 17.2MB/s] 55%|█████▍    | 53.6M/97.8M [00:03<00:02, 17.4MB/s] 57%|█████▋    | 55.4M/97.8M [00:03<00:02, 17.3MB/s] 58%|█████▊    | 57.1M/97.8M [00:03<00:02, 17.4MB/s] 60%|██████    | 58.9M/97.8M [00:03<00:02, 17.4MB/s] 62%|██████▏   | 60.6M/97.8M [00:03<00:02, 17.3MB/s] 64%|██████▍   | 62.4M/97.8M [00:03<00:02, 17.4MB/s] 66%|██████▌   | 64.1M/97.8M [00:03<00:02, 17.2MB/s] 67%|██████▋   | 65.9M/97.8M [00:04<00:01, 17.1MB/s] 69%|██████▉   | 67.6M/97.8M [00:04<00:01, 17.2MB/s] 71%|███████   | 69.4M/97.8M [00:04<00:01, 17.3MB/s] 73%|███████▎  | 71.1M/97.8M [00:04<00:01, 17.2MB/s] 75%|███████▍  | 72.9M/97.8M [00:04<00:01, 17.0MB/s] 76%|███████▋  | 74.6M/97.8M [00:04<00:01, 17.2MB/s] 78%|███████▊  | 76.4M/97.8M [00:04<00:01, 17.3MB/s] 80%|███████▉  | 78.1M/97.8M [00:04<00:01, 17.5MB/s] 82%|████████▏ | 79.9M/97.8M [00:04<00:01, 17.5MB/s] 83%|████████▎ | 81.6M/97.8M [00:04<00:00, 17.4MB/s] 85%|████████▌ | 83.4M/97.8M [00:05<00:00, 17.4MB/s] 87%|████████▋ | 85.1M/97.8M [00:05<00:00, 17.5MB/s] 89%|████████▉ | 86.9M/97.8M [00:05<00:00, 17.1MB/s] 91%|█████████ | 88.6M/97.8M [00:05<00:00, 16.8MB/s] 92%|█████████▏| 90.4M/97.8M [00:05<00:00, 17.0MB/s] 94%|█████████▍| 92.1M/97.8M [00:05<00:00, 17.1MB/s] 96%|█████████▌| 93.9M/97.8M [00:05<00:00, 17.3MB/s] 98%|█████████▊| 95.6M/97.8M [00:05<00:00, 17.4MB/s]100%|█████████▉| 97.4M/97.8M [00:05<00:00, 17.3MB/s]100%|██████████| 97.8M/97.8M [00:05<00:00, 17.2MB/s]
+Epoch 0 running
+Current time: 2024-05-22 04:49:10.318377 [Train #0] Loss: 0.3400 Acc: 93.8537% Time: 82.6479s
+[Test #0] Loss: 0.1302 Acc: 97.5513% Time: 89.4400s
+Epoch 1 running
+Current time: 2024-05-22 04:50:37.805848 [Train #1] Loss: 0.0754 Acc: 98.7591% Time: 170.1354s
+[Test #1] Loss: 0.0435 Acc: 99.3051% Time: 176.9383s
+Epoch 2 running
+Current time: 2024-05-22 04:52:06.649791 [Train #2] Loss: 0.0395 Acc: 99.4065% Time: 258.9793s
+[Test #2] Loss: 0.0348 Acc: 99.3878% Time: 265.8064s
+Epoch 3 running
+Current time: 2024-05-22 04:53:35.121658 [Train #3] Loss: 0.0279 Acc: 99.5967% Time: 347.4511s
+[Test #3] Loss: 0.0415 Acc: 99.2720% Time: 354.1829s
+Epoch 4 running
+Current time: 2024-05-22 04:55:03.257428 [Train #4] Loss: 0.0223 Acc: 99.6691% Time: 435.5870s
+[Test #4] Loss: 0.0202 Acc: 99.6525% Time: 442.3643s
+Epoch 5 running
+Current time: 2024-05-22 04:56:31.470193 [Train #5] Loss: 0.0208 Acc: 99.7063% Time: 523.7997s
+[Test #5] Loss: 0.0280 Acc: 99.4871% Time: 530.5480s
+Epoch 6 running
+Current time: 2024-05-22 04:58:00.315897 [Train #6] Loss: 0.0130 Acc: 99.8201% Time: 612.6454s
+[Test #6] Loss: 0.0163 Acc: 99.7849% Time: 619.4067s
+Epoch 7 running
+Current time: 2024-05-22 04:59:28.861847 [Train #7] Loss: 0.0188 Acc: 99.6836% Time: 701.1914s
+[Test #7] Loss: 0.0189 Acc: 99.6691% Time: 708.2852s
+Epoch 8 running
+Current time: 2024-05-22 05:00:57.816569 [Train #8] Loss: 0.0147 Acc: 99.7704% Time: 790.1461s
+[Test #8] Loss: 0.0243 Acc: 99.5533% Time: 796.9813s
+Epoch 9 running
+Current time: 2024-05-22 05:02:25.550714 [Train #9] Loss: 0.0114 Acc: 99.8263% Time: 877.8803s
+[Test #9] Loss: 0.0238 Acc: 99.6856% Time: 884.6289s

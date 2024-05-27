@@ -1,0 +1,71 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+data_argument True
+num_epochs 10
+batch_size 32
+model 2
+pretrained False
+optimizer_type 2
+device 1
+this is the pretrained: False
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+Epoch 0 running
+Current time: 2024-05-21 15:57:15.479734 [Train #0] Loss: 0.7279 Acc: 84.5556% Time: 131.6343s
+[Test #0] Loss: 0.4421 Acc: 90.4202% Time: 139.9208s
+Epoch 1 running
+Current time: 2024-05-21 15:59:35.185336 [Train #1] Loss: 0.3119 Acc: 93.9260% Time: 271.3398s
+[Test #1] Loss: 0.3606 Acc: 93.7128% Time: 279.6205s
+Epoch 2 running
+Current time: 2024-05-21 16:01:55.109031 [Train #2] Loss: 0.1701 Acc: 96.8937% Time: 411.2635s
+[Test #2] Loss: 0.1080 Acc: 98.1304% Time: 419.5301s
+Epoch 3 running
+Current time: 2024-05-21 16:04:15.361795 [Train #3] Loss: 0.1094 Acc: 98.0539% Time: 551.5162s
+[Test #3] Loss: 0.1254 Acc: 98.0146% Time: 559.8527s
+Epoch 4 running
+Current time: 2024-05-21 16:06:35.749065 [Train #4] Loss: 0.0817 Acc: 98.5999% Time: 691.9035s
+[Test #4] Loss: 0.0613 Acc: 98.9246% Time: 700.2584s
+Epoch 5 running
+Current time: 2024-05-21 16:08:55.883924 [Train #5] Loss: 0.0732 Acc: 98.7881% Time: 832.0384s
+[Test #5] Loss: 0.0747 Acc: 98.7095% Time: 840.3990s
+Epoch 6 running
+Current time: 2024-05-21 16:11:16.205688 [Train #6] Loss: 0.0612 Acc: 98.9349% Time: 972.3601s
+[Test #6] Loss: 0.0377 Acc: 99.4375% Time: 980.6874s
+Epoch 7 running
+Current time: 2024-05-21 16:13:36.396129 [Train #7] Loss: 0.0515 Acc: 99.1335% Time: 1112.5506s
+[Test #7] Loss: 0.0472 Acc: 99.3382% Time: 1120.8245s
+Epoch 8 running
+Current time: 2024-05-21 16:15:56.412467 [Train #8] Loss: 0.0382 Acc: 99.3734% Time: 1252.5669s
+[Test #8] Loss: 0.0425 Acc: 99.3051% Time: 1260.9079s
+Epoch 9 running
+Current time: 2024-05-21 16:18:16.565601 [Train #9] Loss: 0.0426 Acc: 99.3196% Time: 1392.7200s
+[Test #9] Loss: 0.0233 Acc: 99.6691% Time: 1401.0330s
+Traceback (most recent call last):
+  File "main.py", line 180, in <module>
+    train(num_epochs=args.num_epochs, data_argumentation=args.data_argumentation,batch_size=args.batch_size,
+  File "main.py", line 166, in train
+    torch.save(model.state_dict(), save_path)
+  File "/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/serialization.py", line 627, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+  File "/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/serialization.py", line 501, in _open_zipfile_writer
+    return container(name_or_buffer)
+  File "/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/serialization.py", line 472, in __init__
+    super().__init__(torch._C.PyTorchFileWriter(self.name))
+RuntimeError: Parent directory /disk8t/jialiangfan/trained_models does not exist.

@@ -1,0 +1,40 @@
+data_argument True
+num_epochs 10
+batch_size 32
+model_type: ViT_Huge_patch14
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 1
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+Traceback (most recent call last):
+  File "main.py", line 248, in <module>
+    train(num_epochs=args.num_epochs, data_argumentation=args.data_argumentation,batch_size=args.batch_size,
+  File "main.py", line 111, in train
+    model=select_model(model_type,pretrained)
+  File "main.py", line 97, in select_model
+    model=DualViT(num_class1=2,num_class2=4,type='huge',pretrained=pretrained)
+  File "/home/jialiangfan/head_blood/models/vit.py", line 48, in __init__
+    self.backbone = vit_h_14(pretrained=pretrained)
+  File "/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py", line 142, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py", line 203, in inner_wrapper
+    raise ValueError(f"No weights available for model {builder.__name__}")
+ValueError: No weights available for model vit_h_14

@@ -1,0 +1,64 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet34_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet34_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/resnet34-b627a593.pth" to /home/jialiangfan/.cache/torch/hub/checkpoints/resnet34-b627a593.pth
+data_argument True
+num_epochs 10
+batch_size 32
+model_type: ResNet34
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 1
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+  0%|          | 0.00/83.3M [00:00<?, ?B/s]  1%|          | 768k/83.3M [00:00<00:22, 3.78MB/s]  2%|▏         | 1.88M/83.3M [00:00<00:12, 7.02MB/s]  3%|▎         | 2.75M/83.3M [00:00<00:18, 4.60MB/s]  5%|▍         | 3.88M/83.3M [00:00<00:15, 5.23MB/s]  6%|▋         | 5.38M/83.3M [00:00<00:11, 7.23MB/s]  8%|▊         | 6.25M/83.3M [00:01<00:12, 6.66MB/s]  8%|▊         | 7.00M/83.3M [00:01<00:13, 6.14MB/s]  9%|▉         | 7.75M/83.3M [00:01<00:14, 5.34MB/s] 12%|█▏        | 9.62M/83.3M [00:01<00:09, 8.21MB/s] 13%|█▎        | 10.6M/83.3M [00:01<00:12, 6.13MB/s] 14%|█▍        | 12.0M/83.3M [00:02<00:11, 6.47MB/s] 16%|█▌        | 13.4M/83.3M [00:02<00:09, 7.68MB/s] 17%|█▋        | 14.2M/83.3M [00:02<00:12, 5.80MB/s] 19%|█▉        | 15.9M/83.3M [00:02<00:10, 6.45MB/s] 21%|██        | 17.1M/83.3M [00:02<00:09, 7.52MB/s] 22%|██▏       | 18.0M/83.3M [00:02<00:09, 6.87MB/s] 23%|██▎       | 18.9M/83.3M [00:03<00:10, 6.43MB/s] 24%|██▎       | 19.6M/83.3M [00:03<00:11, 5.98MB/s] 25%|██▌       | 21.0M/83.3M [00:03<00:08, 7.53MB/s] 26%|██▋       | 21.9M/83.3M [00:03<00:09, 6.84MB/s] 27%|██▋       | 22.6M/83.3M [00:03<00:10, 6.26MB/s] 28%|██▊       | 23.5M/83.3M [00:03<00:10, 5.98MB/s] 30%|███       | 25.1M/83.3M [00:03<00:07, 8.01MB/s] 31%|███       | 26.0M/83.3M [00:04<00:10, 5.79MB/s] 33%|███▎      | 27.5M/83.3M [00:04<00:09, 6.34MB/s] 35%|███▍      | 28.8M/83.3M [00:04<00:07, 7.44MB/s] 36%|███▌      | 29.6M/83.3M [00:04<00:08, 6.84MB/s] 36%|███▋      | 30.4M/83.3M [00:04<00:08, 6.30MB/s] 38%|███▊      | 31.4M/83.3M [00:05<00:08, 6.20MB/s] 39%|███▉      | 32.8M/83.3M [00:05<00:06, 7.66MB/s] 40%|████      | 33.6M/83.3M [00:05<00:07, 6.97MB/s] 41%|████▏     | 34.4M/83.3M [00:05<00:08, 6.34MB/s] 42%|████▏     | 35.4M/83.3M [00:05<00:08, 6.22MB/s] 44%|████▍     | 36.9M/83.3M [00:05<00:06, 7.89MB/s] 45%|████▌     | 37.8M/83.3M [00:06<00:08, 5.36MB/s] 47%|████▋     | 39.2M/83.3M [00:06<00:07, 6.49MB/s] 49%|████▉     | 40.8M/83.3M [00:06<00:05, 7.94MB/s] 50%|█████     | 41.8M/83.3M [00:06<00:07, 6.08MB/s] 52%|█████▏    | 43.1M/83.3M [00:06<00:06, 6.39MB/s] 53%|█████▎    | 44.5M/83.3M [00:07<00:05, 7.58MB/s] 54%|█████▍    | 45.4M/83.3M [00:07<00:05, 6.93MB/s] 57%|█████▋    | 47.1M/83.3M [00:07<00:04, 9.05MB/s] 59%|█████▊    | 48.9M/83.3M [00:07<00:03, 10.8MB/s] 61%|██████    | 50.6M/83.3M [00:07<00:02, 12.4MB/s] 63%|██████▎   | 52.2M/83.3M [00:07<00:02, 13.5MB/s] 65%|██████▍   | 53.9M/83.3M [00:07<00:02, 14.3MB/s] 67%|██████▋   | 55.5M/83.3M [00:07<00:01, 15.1MB/s] 69%|██████▊   | 57.2M/83.3M [00:07<00:01, 15.8MB/s] 71%|███████   | 58.9M/83.3M [00:08<00:01, 16.2MB/s] 73%|███████▎  | 60.6M/83.3M [00:08<00:01, 16.7MB/s] 75%|███████▍  | 62.4M/83.3M [00:08<00:01, 16.9MB/s] 77%|███████▋  | 64.1M/83.3M [00:08<00:01, 17.2MB/s] 79%|███████▉  | 65.9M/83.3M [00:08<00:01, 17.3MB/s] 81%|████████  | 67.6M/83.3M [00:08<00:00, 16.4MB/s] 84%|████████▎ | 69.6M/83.3M [00:08<00:00, 17.6MB/s] 86%|████████▌ | 71.4M/83.3M [00:08<00:00, 17.5MB/s] 88%|████████▊ | 73.1M/83.3M [00:08<00:00, 17.5MB/s] 90%|████████▉ | 74.9M/83.3M [00:09<00:00, 17.1MB/s] 92%|█████████▏| 76.6M/83.3M [00:09<00:00, 17.3MB/s] 94%|█████████▍| 78.4M/83.3M [00:09<00:00, 17.3MB/s] 96%|█████████▌| 80.1M/83.3M [00:09<00:00, 17.3MB/s] 98%|█████████▊| 81.9M/83.3M [00:09<00:00, 17.5MB/s]100%|██████████| 83.3M/83.3M [00:09<00:00, 9.17MB/s]
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Epoch 0 running
+Current time: 2024-05-22 04:35:45.214433 [Train #0] Loss: 0.3925 Acc: 92.6480% Time: 71.6616s
+[Test #0] Loss: 0.0844 Acc: 98.7426% Time: 78.0134s
+Epoch 1 running
+Current time: 2024-05-22 04:37:03.416188 [Train #1] Loss: 0.0948 Acc: 98.5565% Time: 149.8633s
+[Test #1] Loss: 0.0358 Acc: 99.4044% Time: 156.1957s
+Epoch 2 running
+Current time: 2024-05-22 04:38:23.796869 [Train #2] Loss: 0.0504 Acc: 99.2638% Time: 230.2438s
+[Test #2] Loss: 0.0294 Acc: 99.4209% Time: 236.4737s
+Epoch 3 running
+Current time: 2024-05-22 04:39:42.723667 [Train #3] Loss: 0.0352 Acc: 99.4747% Time: 309.1706s
+[Test #3] Loss: 0.0210 Acc: 99.7518% Time: 315.3525s
+Epoch 4 running
+Current time: 2024-05-22 04:41:01.261278 [Train #4] Loss: 0.0259 Acc: 99.6215% Time: 387.7082s
+[Test #4] Loss: 0.0194 Acc: 99.6691% Time: 393.9239s
+Epoch 5 running
+Current time: 2024-05-22 04:42:18.850284 [Train #5] Loss: 0.0202 Acc: 99.7084% Time: 465.2972s
+[Test #5] Loss: 0.0176 Acc: 99.7187% Time: 471.6562s
+Epoch 6 running
+Current time: 2024-05-22 04:43:38.068731 [Train #6] Loss: 0.0238 Acc: 99.6215% Time: 544.5157s
+[Test #6] Loss: 0.0125 Acc: 99.8015% Time: 550.7102s
+Epoch 7 running
+Current time: 2024-05-22 04:44:56.228918 [Train #7] Loss: 0.0186 Acc: 99.7498% Time: 622.6759s
+[Test #7] Loss: 0.0114 Acc: 99.8180% Time: 629.0546s
+Epoch 8 running
+Current time: 2024-05-22 04:46:15.894674 [Train #8] Loss: 0.0145 Acc: 99.8035% Time: 702.3417s
+[Test #8] Loss: 0.0112 Acc: 99.8180% Time: 708.7435s
+Epoch 9 running
+Current time: 2024-05-22 04:47:33.537398 [Train #9] Loss: 0.0119 Acc: 99.8325% Time: 779.9844s
+[Test #9] Loss: 0.0164 Acc: 99.8345% Time: 786.4101s

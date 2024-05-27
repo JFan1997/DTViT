@@ -1,0 +1,63 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+data_argument True
+num_epochs 10
+batch_size 32
+model 4
+pretrained False
+optimizer_type 2
+device 1
+this is the pretrained: False
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+Epoch 0 running
+Current time: 2024-05-21 20:39:31.011946 [Train #0] Loss: 1.3701 Acc: 68.0936% Time: 53.3516s
+[Test #0] Loss: 1.0922 Acc: 75.2978% Time: 59.2447s
+Epoch 1 running
+Current time: 2024-05-21 20:40:30.168152 [Train #1] Loss: 1.0797 Acc: 75.2078% Time: 112.5077s
+[Test #1] Loss: 0.9580 Acc: 79.6658% Time: 118.3265s
+Epoch 2 running
+Current time: 2024-05-21 20:41:29.185825 [Train #2] Loss: 0.9780 Acc: 78.4920% Time: 171.5254s
+[Test #2] Loss: 0.8798 Acc: 82.3296% Time: 177.3344s
+Epoch 3 running
+Current time: 2024-05-21 20:42:28.465305 [Train #3] Loss: 0.9087 Acc: 80.4877% Time: 230.8049s
+[Test #3] Loss: 0.8406 Acc: 83.0245% Time: 236.6083s
+Epoch 4 running
+Current time: 2024-05-21 20:43:27.527114 [Train #4] Loss: 0.8697 Acc: 81.5217% Time: 289.8668s
+[Test #4] Loss: 0.8051 Acc: 83.8848% Time: 295.6574s
+Epoch 5 running
+Current time: 2024-05-21 20:44:27.823483 [Train #5] Loss: 0.8297 Acc: 82.3675% Time: 350.1631s
+[Test #5] Loss: 0.7755 Acc: 84.4308% Time: 356.0275s
+Epoch 6 running
+Current time: 2024-05-21 20:45:28.122636 [Train #6] Loss: 0.7880 Acc: 83.5877% Time: 410.4622s
+[Test #6] Loss: 0.8554 Acc: 82.6770% Time: 418.6088s
+Epoch 7 running
+Current time: 2024-05-21 20:46:30.967791 [Train #7] Loss: 0.7638 Acc: 84.0075% Time: 473.3073s
+[Test #7] Loss: 0.7363 Acc: 84.8610% Time: 479.3248s
+Epoch 8 running
+Current time: 2024-05-21 20:47:30.898349 [Train #8] Loss: 0.7189 Acc: 85.1491% Time: 533.2380s
+[Test #8] Loss: 0.8154 Acc: 83.2396% Time: 539.0713s
+Epoch 9 running
+Current time: 2024-05-21 20:48:30.279617 [Train #9] Loss: 0.6882 Acc: 85.9701% Time: 592.6193s
+[Test #9] Loss: 0.9089 Acc: 81.5685% Time: 598.3486s

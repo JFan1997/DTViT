@@ -137,10 +137,10 @@ class MyDataset(Dataset):
         # return img,label
 
 
-data_dir='/home/fjl2401/head_blood/dataset1/'
+data_dir='/home/jialiangfan/head_blood/dataset1/'
 
-train_dataset = MyDataset(data_dir,test_frac=0.15,section="training",data_augmentation=False)
-test_dataset=MyDataset(data_dir,test_frac=0.15,section="test",data_augmentation=False)
+train_dataset = MyDataset(data_dir,test_frac=0.15,section="training",data_augmentation=True)
+test_dataset=MyDataset(data_dir,test_frac=0.15,section="test",data_augmentation=True)
 
 
 
@@ -157,13 +157,7 @@ test_dataloader = DataLoader(test_dataset,batch_size=4)
 
 
 batch = next(iter(train_dataloader))
-print(batch.keys())
-# batch['pixel_values'].shape,batch['label'].shape
 
-# print(batch['pixel_values'].shape)
-# for k,v in batch.items():
-  # if isinstance(v, torch.Tensor):
-    # print(k, v.shape)
 
 
 batch = next(iter(test_dataloader))
@@ -195,7 +189,7 @@ args = TrainingArguments(
     metric_for_best_model=metric_name,
     logging_dir='logs',
     remove_unused_columns=False,
-    report_to="tensorboard",
+    # report_to="tensorboard",
 )
 # args.set_optimizer(name="sgd")
 

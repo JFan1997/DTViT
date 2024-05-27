@@ -1,0 +1,56 @@
+data_argument True
+num_epochs 10
+batch_size 32
+model_type: Vision Transformer
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 1
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+Epoch 0 running
+Current time: 2024-05-22 05:26:29.146615 [Train #0] Loss: 1.2181 Acc: 72.2629% Time: 140.6823s
+[Test #0] Loss: 1.0349 Acc: 75.7611% Time: 149.3848s
+Epoch 1 running
+Current time: 2024-05-22 05:28:59.065187 [Train #1] Loss: 0.9172 Acc: 79.0110% Time: 290.6008s
+[Test #1] Loss: 0.9574 Acc: 79.6161% Time: 299.4499s
+Epoch 2 running
+Current time: 2024-05-22 05:31:28.955304 [Train #2] Loss: 0.7486 Acc: 83.6890% Time: 440.4909s
+[Test #2] Loss: 1.3006 Acc: 74.5202% Time: 449.2016s
+Epoch 3 running
+Current time: 2024-05-22 05:33:58.520504 [Train #3] Loss: 0.6702 Acc: 85.6062% Time: 590.0561s
+[Test #3] Loss: 1.0354 Acc: 79.3845% Time: 598.8174s
+Epoch 4 running
+Current time: 2024-05-22 05:36:28.093782 [Train #4] Loss: 0.5895 Acc: 87.5439% Time: 739.6294s
+[Test #4] Loss: 1.0690 Acc: 79.8478% Time: 748.3716s
+Epoch 5 running
+Current time: 2024-05-22 05:38:57.670029 [Train #5] Loss: 0.5256 Acc: 89.2563% Time: 889.2057s
+[Test #5] Loss: 1.2443 Acc: 77.7631% Time: 897.9696s
+Epoch 6 running
+Current time: 2024-05-22 05:41:27.484939 [Train #6] Loss: 0.4696 Acc: 90.6171% Time: 1039.0206s
+[Test #6] Loss: 0.6706 Acc: 87.5414% Time: 1047.7592s
+Epoch 7 running
+Current time: 2024-05-22 05:43:56.968782 [Train #7] Loss: 0.4265 Acc: 91.5023% Time: 1188.5044s
+[Test #7] Loss: 0.7112 Acc: 86.9126% Time: 1197.2786s
+Epoch 8 running
+Current time: 2024-05-22 05:46:26.646679 [Train #8] Loss: 0.3959 Acc: 92.1558% Time: 1338.1823s
+[Test #8] Loss: 0.6033 Acc: 89.0139% Time: 1346.9249s
+Epoch 9 running
+Current time: 2024-05-22 05:48:56.080003 [Train #9] Loss: 0.3622 Acc: 93.0058% Time: 1487.6157s
+[Test #9] Loss: 0.6279 Acc: 89.3283% Time: 1496.4028s

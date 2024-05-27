@@ -29,9 +29,15 @@ from torchvision.transforms import (CenterCrop,
 # print("Image mean: ", image_mean)
 # print("Image std: ", image_std)
 
-normalize = Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])
+
+# Image mean:  [0.5, 0.5, 0.5]
+# Image std:  [0.5, 0.5, 0.5]
+normalize = Normalize(mean=[0.5,0.5,0.5], std=[0.5,0.5,0.5])
 # 
-_train_transforms = Compose(
+
+
+def train_transforms(image):
+    _train_transforms = Compose(
         [
             Resize(256),
             transforms.CenterCrop(224), # 然后进行中心裁剪到模型期望的尺寸
@@ -42,7 +48,13 @@ _train_transforms = Compose(
         ]
     )
 
-_val_transforms = Compose(
+    return _train_transforms(image)
+    # for item in examples:
+        # item['pixel_values'] = _train_transforms(item['image'])
+    # return examples
+
+def val_transforms(examples):
+    _val_transforms = Compose(
         [
             Resize(256),
             transforms.CenterCrop(224), # 然后进行中心裁剪到模型期望的尺寸
@@ -50,14 +62,6 @@ _val_transforms = Compose(
             normalize,
         ]
     )
-
-def train_transforms(image):
-    return _train_transforms(image)
-    # for item in examples:
-        # item['pixel_values'] = _train_transforms(item['image'])
-    # return examples
-
-def val_transforms(examples):
     for item in examples:
         item['pixel_values'] = _val_transforms(item['image'])
     return examples
@@ -149,5 +153,5 @@ class MyDataset(Dataset):
 
 
 if __name__ == "__main__":
-    data_dir = '/home/fjl2401/head_blood/dataset'
+    data_dir = '/home/jialiangfan/head_blood/dataset'
     dataset = MyDataset(data_dir,balance=True)

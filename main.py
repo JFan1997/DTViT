@@ -12,7 +12,8 @@ import torch.optim as optim
 from opt import read_args
 import datetime
 from five_dataset import MyDataset
-from models.vit import DualVisionTransformer
+from models.vit_base import DualVisionTransformer
+from models.vit import DualViT
 from models.alexnet import DualAlexnet
 from models.resnet18 import  DualResNet
 from models.squeezenet import DualSqueezeNet
@@ -20,7 +21,6 @@ from models.densenet import DualDensenet
 from models.vgg import DualVgg16
 import time
 from torch.utils.data import random_split
-from plot_image import plot_image
 from torch.utils.tensorboard import SummaryWriter
 
 from torchvision.transforms import (CenterCrop, 
@@ -38,7 +38,7 @@ criterion2 = nn.CrossEntropyLoss()  #(set loss function)
 
 
 def load_dataset(data_argumentation=False): 
-    data_dir='/home/fjl2401/head_blood/dataset'
+    data_dir='/home/jialiangfan/head_blood/dataset'
     dataset=MyDataset(data_dir,balance=data_argumentation)
     train_size = int(0.8 * len(dataset))
      
@@ -50,15 +50,7 @@ def load_dataset(data_argumentation=False):
     return train_dataset,val_dataset,test_dataset
 
 
-def train(num_epochs = 50, data_argumentation=False,batch_size=8,model_type=0,pretrained=True,optimizer_type=0,device=2):
-    device = torch.device('cuda:{}'.format(device) if torch.cuda.is_available() else 'cpu')
-    experiment_name="dataset-epoche_{}-model_type_{}-pretrained_{}-argumentation_{}-batch_size_{}-optimizer_type-{}".format(num_epochs, model_type, pretrained,data_argumentation,batch_size,optimizer_type)
-    writer = SummaryWriter('./runs/{}/'.format(experiment_name))
-    train_dataset,val_dataset,_=load_dataset(data_argumentation=data_argumentation)
-    print("train_dataset",len(train_dataset))
-    print("val_dataset",len(val_dataset))
-    train_dataloader = DataLoader(train_dataset,batch_size=batch_size)
-    val_dataloader = DataLoader(val_dataset,batch_size=batch_size)
+def select_model(model_type,pretrained):
     if model_type == 0:
         model = DualVisionTransformer(
                 image_size=224,
@@ -88,12 +80,45 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model_type=0,pr
         model=DualResNet(num_class1=2,num_class2=4,pretrained=pretrained,layer=50)
     elif model_type == 7:
         model=DualDensenet(num_class1=2,num_class2=4,pretrained=pretrained)
+        # vit base patch 16
+    elif model_type==8:
+        model=DualViT(num_class1=2,num_class2=4,pretrained=pretrained)
+        # vit base patch 32
+    elif model_type==9:
+        model=DualViT(num_class1=2,num_class2=4,patch=32,pretrained=pretrained)
+        # vit large patch 16
+    elif model_type==10:
+        model=DualViT(num_class1=2,num_class2=4,type='large', patch=16,pretrained=pretrained)
+    # vit large patch 32
+    elif model_type==11:
+        model=DualViT(num_class1=2,num_class2=4,type='large', patch=32,pretrained=pretrained)
+    # vit huge patch 14
+    elif model_type==12:
+        model=DualViT(num_class1=2,num_class2=4,type='huge',pretrained=pretrained)
+    return model
+
+
+def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,pretrained=True,optimizer_type=0,device=2):
+    print("this is the pretrained:",pretrained)
+    device = torch.device('cuda:{}'.format(device) if torch.cuda.is_available() else 'cpu')
+    experiment_name="dataset-epoche_{}-model_type_{}-pretrained_{}-argumentation_{}-batch_size_{}-optimizer_type-{}".format(num_epochs, model_type, pretrained,data_argumentation,batch_size,optimizer_type)
+    writer = SummaryWriter('./runs/{}/'.format(experiment_name))
+    train_dataset,val_dataset,_=load_dataset(data_argumentation=data_argumentation)
+    print("train_dataset",len(train_dataset))
+    print("val_dataset",len(val_dataset))
+    train_dataloader = DataLoader(train_dataset,batch_size=batch_size)
+    val_dataloader = DataLoader(val_dataset,batch_size=batch_size)
+    model=select_model(model_type,pretrained)
     model.to(device)
     if optimizer_type == 0:
         optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
     elif optimizer_type == 1:
         optimizer = optim.Adam(model.parameters(), lr=0.1)
+    elif optimizer_type==2:
+        optimizer=optim.AdamW(model.parameters(),lr=2e-5,weight_decay=0.01)
     start_time = time.time() #(for showing time)
+    best_loss = 1000000
+    best_model = None
     for epoch in range(num_epochs): #(loop for every epoch)
         print("Epoch {} running".format(epoch)) #(printing message)
         """ Training Phase """
@@ -156,11 +181,15 @@ def train(num_epochs = 50, data_argumentation=False,batch_size=8,model_type=0,pr
             # 当前dataset的平均loss for each item
             epoch_loss = running_loss / len(val_dataset)
             epoch_acc = running_corrects / (2*len(val_dataset))* 100
+            if epoch_loss < best_loss:
+                best_loss = epoch_loss
+                print('Best model found at epoch {} with loss: {}'.format(epoch, best_loss))
+                best_model = model.state_dict()
             writer.add_scalar('Validation Loss', epoch_loss, epoch)
             writer.add_scalar('Validation Accuracy', epoch_acc, epoch)
             print('[Test #{}] Loss: {:.4f} Acc: {:.4f}% Time: {:.4f}s'.format(epoch, epoch_loss, epoch_acc, time.time()- start_time))
-    save_path = '/disk2/fjl2401/trained_models/{}.pth'.format(experiment_name)
-    torch.save(model.state_dict(), save_path)
+    save_path = '/disk8t/jialiangfan/trained_models/{}.pth'.format(experiment_name)
+    torch.save(best_model, save_path)
 
 
 if __name__ == '__main__':
@@ -169,10 +198,58 @@ if __name__ == '__main__':
     print("data_argument",arugumentation)
     print("num_epochs",args.num_epochs)
     print("batch_size",args.batch_size)
-    print("model",args.model)
+    # 0: ViT, 1: ResNet, 2:VGG16, 3:alexnet, 4:squeezenet, 5: ResNet34, 6: ResNet50,7:DenseNet
+    if args.model == 0:
+        print("model_type: Vision Transformer")
+    elif args.model == 1:
+        print("model_type: ResNet18")
+    elif args.model == 2:
+        print("model_type: Vgg16")
+    elif args.model == 3:
+        print("model_type: Alexnet")
+    elif args.model == 4:
+        print("model_type: SqueezeNet")
+    elif args.model == 5:
+        print("model_type: ResNet34")
+    elif args.model == 6:
+        print("model_type: ResNet50")
+    elif args.model == 7:
+        print("model_type: DenseNet")
+    
+    # elif model_type==8:
+    #     model=DualViT(num_class1=2,num_class2=4,pretrained=pretrained)
+    #     # vit base patch 32
+    # elif model_type==9:
+    #     model=DualViT(num_class1=2,num_class2=4,patch=32,pretrained=pretrained)
+    #     # vit large patch 16
+    # elif model_type==10:
+    #     model=DualViT(num_class1=2,num_class2=4,type='large', patch=16,pretrained=pretrained)
+    # # vit large patch 32
+    # elif model_type==11:
+    #     model=DualViT(num_class1=2,num_class2=4,type='large', patch=32,pretrained=pretrained)
+    # # vit huge patch 14
+    # elif model_type==12:
+    #     model=DualViT(num_class1=2,num_class2=4,type='huge',pretrained=pretrained)
+    
+    elif args.model == 8:
+        print("model_type: ViT_Base patch 16")
+
+    elif args.model == 9:
+        print("model_type: vit_base_patch32")
+    elif args.model == 10:
+        print("model_type: ViT_Large_patch16")
+    elif args.model == 11:
+        print("model_type: ViT_Large_patch32")
+    elif args.model == 12:
+        print("model_type: ViT_Huge_patch14")
     print("pretrained",args.pretrained)
+    if args.optimizer_type == 0:
+        print("optimizer_type: SGD")
+    elif args.optimizer_type == 1:
+        print("optimizer_type: Adam")
+    elif args.optimizer_type == 2:
+        print("optimizer_type: AdamW")
     print("optimizer_type",args.optimizer_type)
     print("device",args.device)
-
-    train(num_epochs=args.num_epochs, data_argumentation= args.data_argumentation,batch_size=args.batch_size,
+    train(num_epochs=args.num_epochs, data_argumentation=args.data_argumentation,batch_size=args.batch_size,
           model_type=args.model,pretrained=args.pretrained,optimizer_type=args.optimizer_type,device=args.device)

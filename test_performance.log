@@ -1,0 +1,70 @@
+nohup: ignoring input
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+get the testing performance of model:  dataset-epoche_10-model_type_4-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 4
+[Test] Loss: 0.0976 Acc: 98.4122% Time: 6.2960s
+get the testing performance of model:  dataset-epoche_10-model_type_3-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 3
+[Test] Loss: 0.0279 Acc: 99.5203% Time: 5.8673s
+get the testing performance of model:  dataset-epoche_10-model_type_1-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 1
+[Test] Loss: 0.0113 Acc: 99.8346% Time: 6.3136s
+get the testing performance of model:  dataset-epoche_10-model_type_2-pretrained_False-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 2
+[Test] Loss: 17.8079 Acc: 43.0698% Time: 9.0337s
+get the testing performance of model:  dataset-epoche_10-model_type_0-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 0
+[Test] Loss: 0.5656 Acc: 89.6130% Time: 10.1667s
+get the testing performance of model:  dataset-epoche_10-model_type_5-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 5
+[Test] Loss: 0.0069 Acc: 99.8842% Time: 6.9495s
+get the testing performance of model:  dataset-epoche_10-model_type_6-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 6
+[Test] Loss: 0.0061 Acc: 99.9338% Time: 7.2001s
+get the testing performance of model:  dataset-epoche_10-model_type_2-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 2
+[Test] Loss: 0.0046 Acc: 99.9669% Time: 9.1436s
+get the testing performance of model:  dataset-epoche_10-model_type_7-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 7
+[Test] Loss: 0.0084 Acc: 99.8677% Time: 10.2036s
+get the testing performance of model:  dataset-epoche_10-model_type_8-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 8
+[Test] Loss: 0.0114 Acc: 99.8015% Time: 9.9846s
+get the testing performance of model:  dataset-epoche_10-model_type_11-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 11
+[Test] Loss: 0.0121 Acc: 99.8511% Time: 10.8440s
+get the testing performance of model:  dataset-epoche_10-model_type_4-pretrained_False-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 4
+[Test] Loss: 13.3710 Acc: 43.0698% Time: 6.2422s
+get the testing performance of model:  dataset-epoche_20-model_type_2-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 2
+[Test] Loss: 0.0052 Acc: 99.9008% Time: 9.1303s
+get the testing performance of model:  dataset-epoche_10-model_type_3-pretrained_False-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 3
+[Test] Loss: 0.5296 Acc: 90.6550% Time: 5.9927s
+get the testing performance of model:  dataset-epoche_10-model_type_9-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 9
+[Test] Loss: 0.0218 Acc: 99.7188% Time: 7.3495s
+get the testing performance of model:  dataset-epoche_10-model_type_10-pretrained_True-argumentation_True-batch_size_32-optimizer_type-2.pth
+model_type: 10
+[Test] Loss: 0.0533 Acc: 99.0241% Time: 27.4895s

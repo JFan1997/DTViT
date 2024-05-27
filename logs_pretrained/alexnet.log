@@ -1,0 +1,66 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=SqueezeNet1_0_Weights.IMAGENET1K_V1`. You can also use `weights=SqueezeNet1_0_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/squeezenet1_0-b66bff10.pth" to /home/jialiangfan/.cache/torch/hub/checkpoints/squeezenet1_0-b66bff10.pth
+data_argument True
+num_epochs 10
+batch_size 32
+model_type: SqueezeNet
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 1
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+  0%|          | 0.00/4.78M [00:00<?, ?B/s]  5%|▌         | 256k/4.78M [00:00<00:02, 1.86MB/s] 34%|███▍      | 1.62M/4.78M [00:00<00:00, 7.17MB/s] 50%|████▉     | 2.38M/4.78M [00:00<00:00, 6.04MB/s] 65%|██████▌   | 3.12M/4.78M [00:00<00:00, 6.51MB/s] 99%|█████████▉| 4.75M/4.78M [00:00<00:00, 9.66MB/s]100%|██████████| 4.78M/4.78M [00:00<00:00, 6.66MB/s]
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Epoch 0 running
+Current time: 2024-05-22 04:25:15.543428 [Train #0] Loss: 0.7798 Acc: 83.9724% Time: 54.0954s
+[Test #0] Loss: 0.5018 Acc: 90.2879% Time: 60.4044s
+Epoch 1 running
+Current time: 2024-05-22 04:26:15.437858 [Train #1] Loss: 0.4604 Acc: 91.1962% Time: 113.9897s
+[Test #1] Loss: 0.3407 Acc: 93.9775% Time: 119.9292s
+Epoch 2 running
+Current time: 2024-05-22 04:27:15.492628 [Train #2] Loss: 0.3573 Acc: 93.3635% Time: 174.0446s
+[Test #2] Loss: 0.2777 Acc: 95.1191% Time: 179.9762s
+Epoch 3 running
+Current time: 2024-05-22 04:28:15.069504 [Train #3] Loss: 0.2897 Acc: 94.7429% Time: 233.6215s
+[Test #3] Loss: 0.2250 Acc: 96.1449% Time: 239.6136s
+Epoch 4 running
+Current time: 2024-05-22 04:29:15.258884 [Train #4] Loss: 0.2441 Acc: 95.6426% Time: 293.8108s
+[Test #4] Loss: 0.1960 Acc: 96.7902% Time: 299.7603s
+Epoch 5 running
+Current time: 2024-05-22 04:30:15.178031 [Train #5] Loss: 0.2132 Acc: 96.1265% Time: 353.7299s
+[Test #5] Loss: 0.1705 Acc: 96.9391% Time: 361.4141s
+Epoch 6 running
+Current time: 2024-05-22 04:31:16.597097 [Train #6] Loss: 0.1823 Acc: 96.6104% Time: 415.1490s
+[Test #6] Loss: 0.1465 Acc: 97.4355% Time: 421.0722s
+Epoch 7 running
+Current time: 2024-05-22 04:32:16.379835 [Train #7] Loss: 0.1636 Acc: 97.1026% Time: 474.9317s
+[Test #7] Loss: 0.1341 Acc: 97.7995% Time: 480.8656s
+Epoch 8 running
+Current time: 2024-05-22 04:33:16.383607 [Train #8] Loss: 0.1483 Acc: 97.3591% Time: 534.9354s
+[Test #8] Loss: 0.1297 Acc: 97.7333% Time: 540.9004s
+Epoch 9 running
+Current time: 2024-05-22 04:34:16.150590 [Train #9] Loss: 0.1368 Acc: 97.5845% Time: 594.7025s
+[Test #9] Loss: 0.1124 Acc: 98.2462% Time: 600.6682s
