@@ -26,8 +26,10 @@
 
 
 # model 8
-python main.py --data_argumentation True --optimizer_type 2 --model 8 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/vit_base_16.log 2>&1
-python main.py --data_argumentation True --optimizer_type 2 --model 9 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/vit_base_32.log 2>&1
-python main.py --data_argumentation True --optimizer_type 2 --model 10 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/vit_large_16.log 2>&1
-python main.py --data_argumentation True --optimizer_type 2 --model 11 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/vit_large_32.log 2>&1
-python main.py --data_argumentation True --optimizer_type 2 --model 12 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/vit_huge_14.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 1 --num_epochs 10 --device 0 --pretrained > ./logs_pretrained/ResNet18-epoche10.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 2 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/vgg-16-epoche10.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 3 --num_epochs 10 --device 0 --pretrained > ./logs_pretrained/Alexnet-epoche10.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 4 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/SqueezeNet-epoche10.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 5 --num_epochs 10 --device 0 --pretrained > ./logs_pretrained/ResNet34-epoche10.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 6 --num_epochs 10 --device 1 --pretrained > ./logs_pretrained/ResNet50-epoche10.log 2>&1
+python main.py --data_argumentation True --optimizer_type 2 --model 7 --num_epochs 10 --device 0 --pretrained > ./logs_pretrained/DenseNet-epoche10.log 2>&1

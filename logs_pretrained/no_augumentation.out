@@ -1,0 +1,60 @@
+Epoch 0 running
+Current time: 2024-06-10 09:12:52.272996 [Train #0] Loss: 0.3578 Acc: 93.8192% Time: 139.2364s
+[Test #0] Loss: 0.2194 Acc: 96.4032% Time: 145.5848s
+Epoch 1 running
+Current time: 2024-06-10 09:15:17.755998 [Train #1] Loss: 0.1484 Acc: 97.3814% Time: 284.7192s
+[Test #1] Loss: 0.1396 Acc: 97.9051% Time: 291.0379s
+Epoch 2 running
+Current time: 2024-06-10 09:17:43.308383 [Train #2] Loss: 0.0822 Acc: 98.4585% Time: 430.2716s
+[Test #2] Loss: 0.1114 Acc: 98.4190% Time: 436.6345s
+Epoch 3 running
+Current time: 2024-06-10 09:20:08.794160 [Train #3] Loss: 0.0560 Acc: 99.0464% Time: 575.7574s
+[Test #3] Loss: 0.1035 Acc: 98.3794% Time: 582.0854s
+Epoch 4 running
+Current time: 2024-06-10 09:22:34.238078 [Train #4] Loss: 0.0401 Acc: 99.3478% Time: 721.2013s
+[Test #4] Loss: 0.1001 Acc: 98.4980% Time: 727.5228s
+Epoch 5 running
+Current time: 2024-06-10 09:24:59.692669 [Train #5] Loss: 0.0324 Acc: 99.4812% Time: 866.6559s
+[Test #5] Loss: 0.1145 Acc: 98.6166% Time: 872.9752s
+Epoch 6 running
+Current time: 2024-06-10 09:27:25.119854 [Train #6] Loss: 0.0337 Acc: 99.4269% Time: 1012.0831s
+[Test #6] Loss: 0.0932 Acc: 98.5375% Time: 1018.4111s
+Epoch 7 running
+Current time: 2024-06-10 09:29:50.622910 [Train #7] Loss: 0.0340 Acc: 99.4121% Time: 1157.5861s
+[Test #7] Loss: 0.0983 Acc: 98.5375% Time: 1163.9040s
+Epoch 8 running
+Current time: 2024-06-10 09:32:16.154475 [Train #8] Loss: 0.0375 Acc: 99.3725% Time: 1303.1177s
+[Test #8] Loss: 0.0839 Acc: 98.8538% Time: 1309.4403s
+Epoch 9 running
+Current time: 2024-06-10 09:34:41.725009 [Train #9] Loss: 0.0220 Acc: 99.6294% Time: 1448.6883s
+[Test #9] Loss: 0.0771 Acc: 98.9723% Time: 1455.0149s
+Epoch 10 running
+Current time: 2024-06-10 09:37:07.195850 [Train #10] Loss: 0.0198 Acc: 99.6492% Time: 1594.1591s
+[Test #10] Loss: 0.0973 Acc: 98.6956% Time: 1600.4855s
+Epoch 11 running
+Current time: 2024-06-10 09:39:32.495739 [Train #11] Loss: 0.0292 Acc: 99.5109% Time: 1739.4590s
+[Test #11] Loss: 0.0851 Acc: 98.9328% Time: 1745.7592s
+Epoch 12 running
+Current time: 2024-06-10 09:41:57.829888 [Train #12] Loss: 0.0172 Acc: 99.7184% Time: 1884.7931s
+[Test #12] Loss: 0.0932 Acc: 98.8142% Time: 1891.0951s
+Epoch 13 running
+Current time: 2024-06-10 09:44:23.160096 [Train #13] Loss: 0.0214 Acc: 99.6294% Time: 2030.1233s
+[Test #13] Loss: 0.0867 Acc: 98.9723% Time: 2036.4340s
+Epoch 14 running
+Current time: 2024-06-10 09:46:48.398422 [Train #14] Loss: 0.0166 Acc: 99.7480% Time: 2175.3617s
+[Test #14] Loss: 0.0746 Acc: 99.1304% Time: 2181.6609s
+Epoch 15 running
+Current time: 2024-06-10 09:49:13.765987 [Train #15] Loss: 0.0161 Acc: 99.7134% Time: 2320.7292s
+[Test #15] Loss: 0.0784 Acc: 98.6166% Time: 2327.0174s
+Epoch 16 running
+Current time: 2024-06-10 09:51:39.101408 [Train #16] Loss: 0.0227 Acc: 99.6591% Time: 2466.0646s
+[Test #16] Loss: 0.1717 Acc: 98.3399% Time: 2472.3685s
+Epoch 17 running
+Current time: 2024-06-10 09:54:05.015057 [Train #17] Loss: 0.0296 Acc: 99.5405% Time: 2611.9783s
+[Test #17] Loss: 0.0807 Acc: 98.8933% Time: 2618.2872s
+Epoch 18 running
+Current time: 2024-06-10 09:56:30.449847 [Train #18] Loss: 0.0152 Acc: 99.7381% Time: 2757.4131s
+[Test #18] Loss: 0.1053 Acc: 98.7352% Time: 2763.6873s
+Epoch 19 running
+Current time: 2024-06-10 09:58:55.499839 [Train #19] Loss: 0.0145 Acc: 99.7678% Time: 2902.4631s
+[Test #19] Loss: 0.0769 Acc: 98.8538% Time: 2908.7129s

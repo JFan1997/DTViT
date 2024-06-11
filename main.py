@@ -11,7 +11,7 @@ from torchvision.models import vit_b_16
 import torch.optim as optim
 from opt import read_args
 import datetime
-from five_dataset import MyDataset
+from five_dataset import MyDataset,generate_data_list
 from models.vit_base import DualVisionTransformer
 from models.vit import DualViT
 from models.alexnet import DualAlexnet
@@ -22,29 +22,49 @@ from models.vgg import DualVgg16
 import time
 from torch.utils.data import random_split
 from torch.utils.tensorboard import SummaryWriter
-
+from five_dataset import train_transforms,val_transforms
 from torchvision.transforms import (CenterCrop, 
                                     Compose, 
-                                    Normalize,
-                                    RandomRotation,
-                                    RandomResizedCrop,
-                                    RandomHorizontalFlip,
-                                    RandomAdjustSharpness,
                                     Resize, 
                                     ToTensor)
 
 criterion1 = nn.CrossEntropyLoss()  #(set loss function)
 criterion2 = nn.CrossEntropyLoss()  #(set loss function)
 
+# def load_dataset(data_argumentation=False): 
+#     data_dir='/disk8t/jialiangfan/dataset/ICH'
+#     # 训练数据集
+#     train_path=os.path.join(data_dir,"train")
+#     train_dataset=MyDataset(data_dir,section="train",balance=data_argumentation)
+#     # 验证数据集
+#     val_path=os.path.join(data_dir,"val")
+#     val_dataset=MyDataset(data_dir,section="val",balance=True)
+#     # 测试数据集
+#     test_path=os.path.join(data_dir,"test")
+#     test_dataset=MyDataset(data_dir,section="test",balance=True)
+#     return train_dataset,val_dataset,test_dataset
+
 
 def load_dataset(data_argumentation=False): 
     data_dir='/home/jialiangfan/head_blood/dataset'
-    dataset=MyDataset(data_dir,balance=data_argumentation)
-    train_size = int(0.8 * len(dataset))
-     
-    val_size = int(0.1*len(dataset))
-    test_size=len(dataset) - train_size-val_size
-    train_dataset, val_dataset,test_dataset = random_split(dataset, [train_size,val_size,test_size])
+    data_list=generate_data_list(data_dir,balance=True)
+    train_size=int(0.8*len(data_list))
+    val_size=int(0.1*len(data_list))
+    test_size=len(data_list)-train_size-val_size
+    train_datalist, val_datalist, test_datalist = random_split(data_list, [train_size,val_size,test_size])
+    train_dataset=MyDataset(train_datalist,balance=False,section='train')
+    val_dataset=MyDataset(val_datalist,balance=False,section='val')
+    test_dataset=MyDataset(test_datalist,balance=False,section='test')
+    # train_size = int(0.8 * len(dataset))
+    # val_size = int(0.1*len(dataset))
+    # test_size=len(dataset) - train_size-val_size
+    # train_dataset, val_dataset,test_dataset = random_split(dataset, [train_size,val_size,test_size])
+    # print(train_dataset,type(train_dataset),'this is train dataset')
+    # print(val_dataset,type(val_dataset),'this is val dataset')
+    # train_dataset.dataset.set_transform(train_transforms)
+    # val_dataset.dataset.set_transform(val_transforms)
+    # print("val_dataset transformer",val_dataset.dataset.transform)
+    # print("train_dataset transformer",train_dataset.dataset.transform)
     # train_dataset = MyDataset(data_dir,test_frac=0.15,section="training")
     # test_dataset=MyDataset(data_dir,test_frac=0.15,section="test")
     return train_dataset,val_dataset,test_dataset
@@ -95,6 +115,10 @@ def select_model(model_type,pretrained):
     # vit huge patch 14
     elif model_type==12:
         model=DualViT(num_class1=2,num_class2=4,type='huge',pretrained=pretrained)
+    elif model_type==13:
+        model=DualViT(num_class1=2,num_class2=4,type='base',pretrained=pretrained,MLP=True)
+    elif model_type==14:
+        model=DualViT(num_class1=2,num_class2=4,type='large',pretrained=pretrained,MLP=True)
     return model
 
 
@@ -103,15 +127,17 @@ def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,p
     device = torch.device('cuda:{}'.format(device) if torch.cuda.is_available() else 'cpu')
     experiment_name="dataset-epoche_{}-model_type_{}-pretrained_{}-argumentation_{}-batch_size_{}-optimizer_type-{}".format(num_epochs, model_type, pretrained,data_argumentation,batch_size,optimizer_type)
     writer = SummaryWriter('./runs/{}/'.format(experiment_name))
-    train_dataset,val_dataset,_=load_dataset(data_argumentation=data_argumentation)
+    train_dataset,val_dataset,test_dataset=load_dataset(data_argumentation=data_argumentation)
     print("train_dataset",len(train_dataset))
     print("val_dataset",len(val_dataset))
+    print("test_dataset",len(test_dataset))
+    print("batch size is",batch_size)
     train_dataloader = DataLoader(train_dataset,batch_size=batch_size)
     val_dataloader = DataLoader(val_dataset,batch_size=batch_size)
     model=select_model(model_type,pretrained)
     model.to(device)
     if optimizer_type == 0:
-        optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
     elif optimizer_type == 1:
         optimizer = optim.Adam(model.parameters(), lr=0.1)
     elif optimizer_type==2:
@@ -233,7 +259,6 @@ if __name__ == '__main__':
     
     elif args.model == 8:
         print("model_type: ViT_Base patch 16")
-
     elif args.model == 9:
         print("model_type: vit_base_patch32")
     elif args.model == 10:
@@ -242,6 +267,10 @@ if __name__ == '__main__':
         print("model_type: ViT_Large_patch32")
     elif args.model == 12:
         print("model_type: ViT_Huge_patch14")
+    elif args.model == 13:
+        print("model_type: ViT_base_MLP")
+    elif args.model == 14:
+        print("model_type: ViT_large_MLP")
     print("pretrained",args.pretrained)
     if args.optimizer_type == 0:
         print("optimizer_type: SGD")
@@ -253,3 +282,4 @@ if __name__ == '__main__':
     print("device",args.device)
     train(num_epochs=args.num_epochs, data_argumentation=args.data_argumentation,batch_size=args.batch_size,
           model_type=args.model,pretrained=args.pretrained,optimizer_type=args.optimizer_type,device=args.device)
+          

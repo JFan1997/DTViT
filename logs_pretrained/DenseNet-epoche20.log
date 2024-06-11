@@ -1,0 +1,98 @@
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jialiangfan/miniconda3/envs/medical/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=DenseNet161_Weights.IMAGENET1K_V1`. You can also use `weights=DenseNet161_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+data_argument True
+num_epochs 20
+batch_size 32
+model_type: DenseNet
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 0
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+Epoch 0 running
+Current time: 2024-06-03 15:10:48.956468 [Train #0] Loss: 0.3339 Acc: 94.3541% Time: 122.2379s
+Best model found at epoch 0 with loss: 0.08030064733209573
+[Test #0] Loss: 0.0803 Acc: 98.9576% Time: 130.8291s
+Epoch 1 running
+Current time: 2024-06-03 15:12:58.795041 [Train #1] Loss: 0.0767 Acc: 98.8502% Time: 252.0764s
+Best model found at epoch 1 with loss: 0.04265823162115819
+[Test #1] Loss: 0.0427 Acc: 99.4375% Time: 260.5995s
+Epoch 2 running
+Current time: 2024-06-03 15:15:08.513503 [Train #2] Loss: 0.0422 Acc: 99.3858% Time: 381.7948s
+Best model found at epoch 2 with loss: 0.03146847222193898
+[Test #2] Loss: 0.0315 Acc: 99.5533% Time: 390.3243s
+Epoch 3 running
+Current time: 2024-06-03 15:17:18.371549 [Train #3] Loss: 0.0294 Acc: 99.5574% Time: 511.6529s
+Best model found at epoch 3 with loss: 0.022678446267810997
+[Test #3] Loss: 0.0227 Acc: 99.6525% Time: 520.1619s
+Epoch 4 running
+Current time: 2024-06-03 15:19:27.940542 [Train #4] Loss: 0.0226 Acc: 99.6670% Time: 641.2219s
+Best model found at epoch 4 with loss: 0.013053138491735825
+[Test #4] Loss: 0.0131 Acc: 99.8345% Time: 649.7643s
+Epoch 5 running
+Current time: 2024-06-03 15:21:37.359504 [Train #5] Loss: 0.0201 Acc: 99.7125% Time: 770.6409s
+Best model found at epoch 5 with loss: 0.012450383361415879
+[Test #5] Loss: 0.0125 Acc: 99.8511% Time: 779.1050s
+Epoch 6 running
+Current time: 2024-06-03 15:23:47.032947 [Train #6] Loss: 0.0190 Acc: 99.7084% Time: 900.3143s
+[Test #6] Loss: 0.0177 Acc: 99.6691% Time: 908.7368s
+Epoch 7 running
+Current time: 2024-06-03 15:25:56.595846 [Train #7] Loss: 0.0128 Acc: 99.7932% Time: 1029.8772s
+Best model found at epoch 7 with loss: 0.010885041637276346
+[Test #7] Loss: 0.0109 Acc: 99.8511% Time: 1038.3790s
+Epoch 8 running
+Current time: 2024-06-03 15:28:06.464048 [Train #8] Loss: 0.0186 Acc: 99.7022% Time: 1159.7454s
+[Test #8] Loss: 0.0360 Acc: 99.5864% Time: 1168.2310s
+Epoch 9 running
+Current time: 2024-06-03 15:30:16.438719 [Train #9] Loss: 0.0114 Acc: 99.8221% Time: 1289.7201s
+[Test #9] Loss: 0.0160 Acc: 99.7353% Time: 1298.3006s
+Epoch 10 running
+Current time: 2024-06-03 15:32:26.687570 [Train #10] Loss: 0.0140 Acc: 99.7932% Time: 1419.9690s
+[Test #10] Loss: 0.0154 Acc: 99.7684% Time: 1428.5215s
+Epoch 11 running
+Current time: 2024-06-03 15:34:36.999708 [Train #11] Loss: 0.0102 Acc: 99.8449% Time: 1550.2810s
+[Test #11] Loss: 0.0110 Acc: 99.8180% Time: 1558.8456s
+Epoch 12 running
+Current time: 2024-06-03 15:36:47.059978 [Train #12] Loss: 0.0092 Acc: 99.8532% Time: 1680.3413s
+[Test #12] Loss: 0.0149 Acc: 99.7849% Time: 1688.8764s
+Epoch 13 running
+Current time: 2024-06-03 15:38:57.166409 [Train #13] Loss: 0.0142 Acc: 99.7642% Time: 1810.4478s
+[Test #13] Loss: 0.0189 Acc: 99.7187% Time: 1819.0329s
+Epoch 14 running
+Current time: 2024-06-03 15:41:07.591418 [Train #14] Loss: 0.0098 Acc: 99.8408% Time: 1940.8728s
+[Test #14] Loss: 0.0109 Acc: 99.8345% Time: 1949.5599s
+Epoch 15 running
+Current time: 2024-06-03 15:43:17.587451 [Train #15] Loss: 0.0065 Acc: 99.8966% Time: 2070.8688s
+[Test #15] Loss: 0.0118 Acc: 99.8511% Time: 2079.4073s
+Epoch 16 running
+Current time: 2024-06-03 15:45:27.655897 [Train #16] Loss: 0.0132 Acc: 99.7725% Time: 2200.9373s
+[Test #16] Loss: 0.0113 Acc: 99.8345% Time: 2209.4773s
+Epoch 17 running
+Current time: 2024-06-03 15:47:37.839780 [Train #17] Loss: 0.0096 Acc: 99.8387% Time: 2331.1211s
+Best model found at epoch 17 with loss: 0.0079745223502549
+[Test #17] Loss: 0.0080 Acc: 99.8511% Time: 2339.6816s
+Epoch 18 running
+Current time: 2024-06-03 15:49:47.892449 [Train #18] Loss: 0.0084 Acc: 99.8532% Time: 2461.1738s
+[Test #18] Loss: 0.0158 Acc: 99.7518% Time: 2469.7627s
+Epoch 19 running
+Current time: 2024-06-03 15:51:57.865923 [Train #19] Loss: 0.0085 Acc: 99.8594% Time: 2591.1473s
+[Test #19] Loss: 0.0114 Acc: 99.8015% Time: 2599.6754s
