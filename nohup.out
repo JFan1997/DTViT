@@ -1,4 +1,245 @@
-Traceback (most recent call last):
-  File "/home/jialiangfan/head_blood/main.py", line 1, in <module>
-    from torchvision import transforms,models,datasets
-ModuleNotFoundError: No module named 'torchvision'
+data_argument True
+num_epochs 10
+batch_size 32
+model_type: ViT Adapter
+pretrained True
+optimizer_type: AdamW
+optimizer_type 2
+device 0
+this is the pretrained: True
+this is label2 counter:  Counter({0: 6093, 3: 4407, 1: 1656, 2: 495})
+max label2 count:  6093
+total num before first balance:  12651
+Deep:  6093
+Lobar:  1656
+Subtentorial:  495
+total num after first balance:  21408
+counter after first balance:  Counter({0: 6093, 2: 5940, 1: 4968, 3: 4407})
+total num before second balance:  21408
+no tumor:  4407
+tumor:  17001
+max label1 count:  17001
+total num after balance:  30222
+no tumor:  13221
+tumor:  17001
+train_dataset 24177
+val_dataset 3022
+test_dataset 3023
+batch size is 32
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+False this praam is not requires grad
+Epoch 0 running
+Current time: 2024-06-11 18:20:44.812586 [Train #0] Loss: 1.2665 Acc: 70.9393% Time: 124.7273s
+Best model found at epoch 0 with loss: 1.0939274304438553
+[Test #0] Loss: 1.0939 Acc: 75.0331% Time: 134.0310s
+Epoch 1 running
+Current time: 2024-06-11 18:22:58.444378 [Train #1] Loss: 1.0616 Acc: 76.0847% Time: 258.3589s
+Best model found at epoch 1 with loss: 0.9703490456392401
+[Test #1] Loss: 0.9703 Acc: 78.6234% Time: 267.6325s
+Epoch 2 running
+Current time: 2024-06-11 18:25:12.091968 [Train #2] Loss: 0.9765 Acc: 78.1549% Time: 392.0064s
+Best model found at epoch 2 with loss: 0.8876593146870106
+[Test #2] Loss: 0.8877 Acc: 80.4434% Time: 401.2713s
+Epoch 3 running
+Current time: 2024-06-11 18:27:25.810492 [Train #3] Loss: 0.9164 Acc: 79.5839% Time: 525.7250s
+Best model found at epoch 3 with loss: 0.8471127185184067
+[Test #3] Loss: 0.8471 Acc: 81.2707% Time: 534.9772s
+Epoch 4 running
+Current time: 2024-06-11 18:29:39.504771 [Train #4] Loss: 0.8654 Acc: 80.8661% Time: 659.4193s
+Best model found at epoch 4 with loss: 0.799131756583087
+[Test #4] Loss: 0.7991 Acc: 82.5943% Time: 668.6733s
+Epoch 5 running
+Current time: 2024-06-11 18:31:53.122048 [Train #5] Loss: 0.8262 Acc: 81.7554% Time: 793.0365s
+Best model found at epoch 5 with loss: 0.7685248551188835
+[Test #5] Loss: 0.7685 Acc: 83.4216% Time: 802.2941s
+Epoch 6 running
+Current time: 2024-06-11 18:34:06.821175 [Train #6] Loss: 0.7883 Acc: 82.7543% Time: 926.7356s
+Best model found at epoch 6 with loss: 0.7370275907529102
+[Test #6] Loss: 0.7370 Acc: 83.9510% Time: 935.9890s
+Epoch 7 running
+Current time: 2024-06-11 18:36:20.535403 [Train #7] Loss: 0.7556 Acc: 83.4409% Time: 1060.4499s
+Best model found at epoch 7 with loss: 0.6945232090612344
+[Test #7] Loss: 0.6945 Acc: 84.9107% Time: 1069.7263s
+Epoch 8 running
+Current time: 2024-06-11 18:38:34.277669 [Train #8] Loss: 0.7094 Acc: 84.7644% Time: 1194.1921s
+Best model found at epoch 8 with loss: 0.6519925984067684
+[Test #8] Loss: 0.6520 Acc: 86.6975% Time: 1203.4475s
+Epoch 9 running
+Current time: 2024-06-11 18:40:47.944247 [Train #9] Loss: 0.6727 Acc: 85.6372% Time: 1327.8587s
+Best model found at epoch 9 with loss: 0.6515967880630241
+[Test #9] Loss: 0.6516 Acc: 86.7803% Time: 1337.1429s

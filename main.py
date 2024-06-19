@@ -19,6 +19,7 @@ from models.resnet18 import  DualResNet
 from models.squeezenet import DualSqueezeNet
 from models.densenet import DualDensenet
 from models.vgg import DualVgg16
+from models.vit_adapter import build_model
 import time
 from torch.utils.data import random_split
 from torch.utils.tensorboard import SummaryWriter
@@ -47,7 +48,7 @@ criterion2 = nn.CrossEntropyLoss()  #(set loss function)
 
 def load_dataset(data_argumentation=False): 
     data_dir='/home/jialiangfan/head_blood/dataset'
-    data_list=generate_data_list(data_dir,balance=True)
+    data_list=generate_data_list(data_dir,balance=False)
     train_size=int(0.8*len(data_list))
     val_size=int(0.1*len(data_list))
     test_size=len(data_list)-train_size-val_size
@@ -119,6 +120,8 @@ def select_model(model_type,pretrained):
         model=DualViT(num_class1=2,num_class2=4,type='base',pretrained=pretrained,MLP=True)
     elif model_type==14:
         model=DualViT(num_class1=2,num_class2=4,type='large',pretrained=pretrained,MLP=True)
+    elif model_type==15:
+        model=build_model()
     return model
 
 
@@ -136,6 +139,16 @@ def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,p
     val_dataloader = DataLoader(val_dataset,batch_size=batch_size)
     model=select_model(model_type,pretrained)
     model.to(device)
+    if model_type==15:
+        for n, value in model.image_encoder.named_parameters(): 
+            if "Adapter" not in n:
+                value.requires_grad = False
+            else:
+                value.requires_grad = True          
+    for param in model.parameters():
+        if not param.requires_grad:
+            print(param.requires_grad,"this praam is not requires grad")  
+
     if optimizer_type == 0:
         optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
     elif optimizer_type == 1:
@@ -145,10 +158,10 @@ def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,p
     start_time = time.time() #(for showing time)
     best_loss = 1000000
     best_model = None
+    model.train()
     for epoch in range(num_epochs): #(loop for every epoch)
         print("Epoch {} running".format(epoch)) #(printing message)
         """ Training Phase """
-        model.train()    #(training model)
         running_loss = 0 #(set loss 0)
         running_corrects = 0 
         # load a batch data of images
@@ -161,7 +174,6 @@ def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,p
             labels1 = labels1.to(device) 
             labels2 = labels2.to(device) 
             # forward inputs and get output
-            optimizer.zero_grad()
             pre_labels1,pre_labels2 = model(image)
             _, preds1 = torch.max(pre_labels1, 1)
             _, preds2 = torch.max(pre_labels2, 1)
@@ -170,6 +182,7 @@ def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,p
             loss=loss1+loss2
             loss.backward()
             optimizer.step()
+            optimizer.zero_grad()
             running_loss += loss.item() * image.size(0)
             running_corrects += torch.sum(preds1 == labels1.data)
             running_corrects += torch.sum(preds2 == labels2.data)
@@ -271,6 +284,8 @@ if __name__ == '__main__':
         print("model_type: ViT_base_MLP")
     elif args.model == 14:
         print("model_type: ViT_large_MLP")
+    elif args.model==15:
+        print("model_type: ViT Adapter")
     print("pretrained",args.pretrained)
     if args.optimizer_type == 0:
         print("optimizer_type: SGD")
