@@ -10,7 +10,7 @@ To address these challenges, we have collected a real-world dataset for the clas
 
 In addition, we propose a neural network structure, the dual-task vision transformer (DTViT), for the automated classification and diagnosis of ICH images. The DTViT utilizes the encoder from the Vision Transformer (ViT), employing attention mechanisms for feature extraction from CT images. Our DTViT framework incorporates two multilayer perceptron (MLP)-based decoders to simultaneously identify the presence of ICH and classify the three types of hemorrhage locations.
 
-Experimental results demonstrate that DTViT performs well on the real-world test dataset. The code and the newly collected dataset for this work will be made publicly available upon paper acceptance at: [https://github.com/Jialiangfan/DTViT](https://github.com/Jialiangfan/DTViT).
+Experimental results demonstrate that DTViT performs well on the real-world test dataset. The code and the newly collected dataset for this paper is available at: [https://github.com/Jialiangfan/DTViT](https://github.com/Jialiangfan/DTViT).
 
 
 ![Diagram](./figures/DNN-structure-final.jpg)
