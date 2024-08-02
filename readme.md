@@ -1,30 +1,64 @@
-## 数据预处理
+# DTViT
+
+This repository contains the source code and data for the paper "Dual-Task Vision Transformer for Rapid and Accurate Intracerebral Hemorrhage CT Image Classification" published in  [arxiv_link](https://arxiv.org/abs/2405.06814).
+
+## Abstract
+
+Intracerebral hemorrhage (ICH) is a severe and sudden medical condition caused by the rupture of blood vessels in the brain, leading to permanent damage to brain tissue and often resulting in functional disabilities or death in patients. Diagnosis and analysis of ICH typically rely on brain CT imaging. Given the urgency of ICH conditions, early treatment is crucial, necessitating rapid analysis of CT images to formulate tailored treatment plans. However, the complexity of ICH CT images and the frequent scarcity of specialist radiologists pose significant challenges.
+
+To address these challenges, we have collected a real-world dataset for the classification of ICH and normal brain CT images, as well as for the classification of three types of ICH based on hemorrhage location: Deep, Subcortical, and Lobar. 
+
+In addition, we propose a neural network structure, the dual-task vision transformer (DTViT), for the automated classification and diagnosis of ICH images. The DTViT utilizes the encoder from the Vision Transformer (ViT), employing attention mechanisms for feature extraction from CT images. Our DTViT framework incorporates two multilayer perceptron (MLP)-based decoders to simultaneously identify the presence of ICH and classify the three types of hemorrhage locations.
+
+Experimental results demonstrate that DTViT performs well on the real-world test dataset. The code and the newly collected dataset for this work will be made publicly available upon paper acceptance at: [https://github.com/Jialiangfan/DTViT](https://github.com/Jialiangfan/DTViT).
 
 
-## 数据集
+![Diagram](./figures/DNN-structure-final.jpg)
 
-1. 原始数据集：/disk8t/jialiangfan/trained_models/dataset/medical_data/2018,2019,2020,2021 DCM文件
-2. 转为png数据集：/disk8t/jialiangfan/trained_models/dataset/medical_data/medical_images/2018,2019,2020,2021, jpg文件
-3. /disk8t/jialiangfan/trained_models/dataset/medical_data/images: 将所有的病人数据大杂烩，放在一起
-4. 每个病人挑一张最好的，/home/jialiangfan/head_blood/dataset/no，没有脑出血的，总共199张
-5. 每个病人挑一张最好的，有脑出血的，/home/jialiangfan/head_blood/dataset/yes，每个人两张，608张
+## INSTALL
+
+To set up the environment for this project, please follow these steps:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/DTViT.git
+    cd yourrepository
+    ```
+
+2. Create the conda environment from the `environment.yml` file:
+    ```bash
+    conda env create -f environment.yml
+    ```
+
+3. Activate the conda environment:
+    ```bash
+    conda activate DTViT
+    ```
+This will install all necessary dependencies and set up the environment to run the project.
 
 
-## 运行指令
 
-## using adam as the optimizer 
+## DATASET
 
-### 测试vit模型
-有数据增强：nohup python main.py --data_argument True --batch_size 32 --num_epochs 50 
-没数据增强：nohup python main.py --data_argument False --batch_size 8 --num_epochs 50
 
-## 训练resnet模型
-nohup python main.py --data_argument True --batch_size 32 --num_epochs 50 --model 1
 
-## 查看log日志
+## USAGE
 
-tensorboard --logdir=runs --port=8080
+You can use the following commands to train different models using the provided script. Below are some examples of how to use the script with different models and parameters:
 
-### 测试
+### Example: Training with Vision Transformer (ViT)
+```bash
+python main.py --data_augmentation True --batch_size 32 --num_epochs 50 --model 10 --pretrained --optimizer_type 1 --device 0
+```
+
+### Example: Training with ResNet18
+```bash
+python main.py --data_augmentation True --batch_size 32 --num_epochs 50 --model 1 --pretrained --optimizer_type 0 --device 0
+```
+
+
+
+
+
 
 

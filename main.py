@@ -1,300 +1,179 @@
-from torchvision import transforms,models,datasets
-from torch.utils.data import DataLoader
-from torch.utils.data import Dataset
-from pathlib import Path
-import torch
-import numpy as np
-from PIL import Image
+import argparse
 import os
-from torch import nn
-from torchvision.models import vit_b_16
-import torch.optim as optim
-from opt import read_args
+import time
 import datetime
-from five_dataset import MyDataset,generate_data_list
+from pathlib import Path
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader, random_split
+from torch.utils.tensorboard import SummaryWriter
+
+from five_dataset import MyDataset, generate_data_list
 from models.vit_base import DualVisionTransformer
 from models.vit import DualViT
 from models.alexnet import DualAlexnet
-from models.resnet18 import  DualResNet
+from models.resnet18 import DualResNet
 from models.squeezenet import DualSqueezeNet
 from models.densenet import DualDensenet
 from models.vgg import DualVgg16
 from models.vit_adapter import build_model
-import time
-from torch.utils.data import random_split
-from torch.utils.tensorboard import SummaryWriter
-from five_dataset import train_transforms,val_transforms
-from torchvision.transforms import (CenterCrop, 
-                                    Compose, 
-                                    Resize, 
-                                    ToTensor)
-
-criterion1 = nn.CrossEntropyLoss()  #(set loss function)
-criterion2 = nn.CrossEntropyLoss()  #(set loss function)
-
-# def load_dataset(data_argumentation=False): 
-#     data_dir='/disk8t/jialiangfan/dataset/ICH'
-#     # 训练数据集
-#     train_path=os.path.join(data_dir,"train")
-#     train_dataset=MyDataset(data_dir,section="train",balance=data_argumentation)
-#     # 验证数据集
-#     val_path=os.path.join(data_dir,"val")
-#     val_dataset=MyDataset(data_dir,section="val",balance=True)
-#     # 测试数据集
-#     test_path=os.path.join(data_dir,"test")
-#     test_dataset=MyDataset(data_dir,section="test",balance=True)
-#     return train_dataset,val_dataset,test_dataset
+from opt import model_types, optimizer_types, device_types
 
 
-def load_dataset(data_argumentation=False): 
-    data_dir='/home/jialiangfan/head_blood/dataset'
-    data_list=generate_data_list(data_dir,balance=False)
-    train_size=int(0.8*len(data_list))
-    val_size=int(0.1*len(data_list))
-    test_size=len(data_list)-train_size-val_size
-    train_datalist, val_datalist, test_datalist = random_split(data_list, [train_size,val_size,test_size])
-    train_dataset=MyDataset(train_datalist,balance=False,section='train')
-    val_dataset=MyDataset(val_datalist,balance=False,section='val')
-    test_dataset=MyDataset(test_datalist,balance=False,section='test')
-    # train_size = int(0.8 * len(dataset))
-    # val_size = int(0.1*len(dataset))
-    # test_size=len(dataset) - train_size-val_size
-    # train_dataset, val_dataset,test_dataset = random_split(dataset, [train_size,val_size,test_size])
-    # print(train_dataset,type(train_dataset),'this is train dataset')
-    # print(val_dataset,type(val_dataset),'this is val dataset')
-    # train_dataset.dataset.set_transform(train_transforms)
-    # val_dataset.dataset.set_transform(val_transforms)
-    # print("val_dataset transformer",val_dataset.dataset.transform)
-    # print("train_dataset transformer",train_dataset.dataset.transform)
-    # train_dataset = MyDataset(data_dir,test_frac=0.15,section="training")
-    # test_dataset=MyDataset(data_dir,test_frac=0.15,section="test")
-    return train_dataset,val_dataset,test_dataset
+def load_dataset(data_augmentation=False): 
+    data_dir = '/home/jialiangfan/DTViT/dataset'
+    data_list = generate_data_list(data_dir, balance=False)
+    train_size = int(0.8 * len(data_list))
+    val_size = int(0.1 * len(data_list))
+    test_size = len(data_list) - train_size - val_size
+    train_datalist, val_datalist, test_datalist = random_split(data_list, [train_size, val_size, test_size])
+    
+    train_dataset = MyDataset(train_datalist, balance=False, section='train')
+    val_dataset = MyDataset(val_datalist, balance=False, section='val')
+    test_dataset = MyDataset(test_datalist, balance=False, section='test')
+    
+    return train_dataset, val_dataset, test_dataset
+
+def select_model(model_type, pretrained):
+    model_classes = {
+        0: DualVisionTransformer,
+        1: DualResNet,
+        2: DualVgg16,
+        3: DualAlexnet,
+        4: DualSqueezeNet,
+        5: lambda: DualResNet(num_class1=2, num_class2=4, pretrained=pretrained, layer=34),
+        6: lambda: DualResNet(num_class1=2, num_class2=4, pretrained=pretrained, layer=50),
+        7: DualDensenet,
+        8: DualViT,
+        9: lambda: DualViT(num_class1=2, num_class2=4, patch=32, pretrained=pretrained),
+        10: lambda: DualViT(num_class1=2, num_class2=4, type='large', patch=16, pretrained=pretrained),
+        11: lambda: DualViT(num_class1=2, num_class2=4, type='large', patch=32, pretrained=pretrained),
+        12: lambda: DualViT(num_class1=2, num_class2=4, type='huge', pretrained=pretrained),
+        13: lambda: DualViT(num_class1=2, num_class2=4, type='base', pretrained=pretrained, MLP=True),
+        14: lambda: DualViT(num_class1=2, num_class2=4, type='large', pretrained=pretrained, MLP=True),
+        15: build_model
+    }
+    
+    return model_classes[model_type]()
 
 
-def select_model(model_type,pretrained):
-    if model_type == 0:
-        model = DualVisionTransformer(
-                image_size=224,
-                patch_size=16,
-                num_layers=12,
-                num_heads=12,
-                hidden_dim=768,
-                mlp_dim=3072,
-                dropout=0.1,
-                attention_dropout=0.1,
-                num_classe1=2,
-                num_classe2=4,
-                representation_size=768,
-                pretrained=pretrained
-            )
-    elif model_type == 1:
-        model= DualResNet(num_class1=2,num_class2=4,pretrained=pretrained)
-    elif model_type == 2:
-        model=DualVgg16(num_class1=2,num_class2=4,pretrained=pretrained)
-    elif model_type == 3:
-        model=DualAlexnet(num_class1=2,num_class2=4,pretrained=pretrained)
-    elif model_type == 4:
-        model=DualSqueezeNet(num_class1=2,num_class2=4,pretrained=pretrained)
-    elif model_type == 5:
-        model=DualResNet(num_class1=2,num_class2=4,pretrained=pretrained,layer=34)
-    elif model_type == 6:
-        model=DualResNet(num_class1=2,num_class2=4,pretrained=pretrained,layer=50)
-    elif model_type == 7:
-        model=DualDensenet(num_class1=2,num_class2=4,pretrained=pretrained)
-        # vit base patch 16
-    elif model_type==8:
-        model=DualViT(num_class1=2,num_class2=4,pretrained=pretrained)
-        # vit base patch 32
-    elif model_type==9:
-        model=DualViT(num_class1=2,num_class2=4,patch=32,pretrained=pretrained)
-        # vit large patch 16
-    elif model_type==10:
-        model=DualViT(num_class1=2,num_class2=4,type='large', patch=16,pretrained=pretrained)
-    # vit large patch 32
-    elif model_type==11:
-        model=DualViT(num_class1=2,num_class2=4,type='large', patch=32,pretrained=pretrained)
-    # vit huge patch 14
-    elif model_type==12:
-        model=DualViT(num_class1=2,num_class2=4,type='huge',pretrained=pretrained)
-    elif model_type==13:
-        model=DualViT(num_class1=2,num_class2=4,type='base',pretrained=pretrained,MLP=True)
-    elif model_type==14:
-        model=DualViT(num_class1=2,num_class2=4,type='large',pretrained=pretrained,MLP=True)
-    elif model_type==15:
-        model=build_model()
-    return model
-
-
-def train(num_epochs = 50, data_argumentation=False, batch_size=8,model_type=0,pretrained=True,optimizer_type=0,device=2):
-    print("this is the pretrained:",pretrained)
-    device = torch.device('cuda:{}'.format(device) if torch.cuda.is_available() else 'cpu')
-    experiment_name="dataset-epoche_{}-model_type_{}-pretrained_{}-argumentation_{}-batch_size_{}-optimizer_type-{}".format(num_epochs, model_type, pretrained,data_argumentation,batch_size,optimizer_type)
-    writer = SummaryWriter('./runs/{}/'.format(experiment_name))
-    train_dataset,val_dataset,test_dataset=load_dataset(data_argumentation=data_argumentation)
-    print("train_dataset",len(train_dataset))
-    print("val_dataset",len(val_dataset))
-    print("test_dataset",len(test_dataset))
-    print("batch size is",batch_size)
-    train_dataloader = DataLoader(train_dataset,batch_size=batch_size)
-    val_dataloader = DataLoader(val_dataset,batch_size=batch_size)
-    model=select_model(model_type,pretrained)
-    model.to(device)
-    if model_type==15:
-        for n, value in model.image_encoder.named_parameters(): 
-            if "Adapter" not in n:
-                value.requires_grad = False
-            else:
-                value.requires_grad = True          
-    for param in model.parameters():
-        if not param.requires_grad:
-            print(param.requires_grad,"this praam is not requires grad")  
-
+def get_optimizer(optimizer_type, model):
     if optimizer_type == 0:
-        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+        return optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
     elif optimizer_type == 1:
-        optimizer = optim.Adam(model.parameters(), lr=0.1)
-    elif optimizer_type==2:
-        optimizer=optim.AdamW(model.parameters(),lr=2e-5,weight_decay=0.01)
-    start_time = time.time() #(for showing time)
-    best_loss = 1000000
+        return optim.Adam(model.parameters(), lr=0.1)
+    elif optimizer_type == 2:
+        return optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0.01)
+
+
+def train(num_epochs=50, data_augmentation=False, batch_size=8, model_type=0, pretrained=True, optimizer_type=0, device=2):
+    device = torch.device(f'cuda:{device}' if torch.cuda.is_available() else 'cpu')
+    experiment_name = f"dataset-epoch_{num_epochs}-model_type_{model_type}-pretrained_{pretrained}-augmentation_{data_augmentation}-batch_size_{batch_size}-optimizer_type-{optimizer_type}"
+    writer = SummaryWriter(f'./runs/{experiment_name}/')
+    
+    train_dataset, val_dataset, test_dataset = load_dataset(data_augmentation=data_augmentation)
+    
+    train_dataloader = DataLoader(train_dataset, batch_size=batch_size)
+    val_dataloader = DataLoader(val_dataset, batch_size=batch_size)
+    
+    model = select_model(model_type, pretrained)
+    model.to(device)
+    
+    if model_type == 15:
+        for n, value in model.image_encoder.named_parameters(): 
+            value.requires_grad = "Adapter" in n
+           
+    optimizer = get_optimizer(optimizer_type, model)
+    
+    criterion1 = nn.CrossEntropyLoss()
+    criterion2 = nn.CrossEntropyLoss()
+    
+    best_loss = float('inf')
     best_model = None
-    model.train()
-    for epoch in range(num_epochs): #(loop for every epoch)
-        print("Epoch {} running".format(epoch)) #(printing message)
-        """ Training Phase """
-        running_loss = 0 #(set loss 0)
-        running_corrects = 0 
-        # load a batch data of images
-        for i, inputs in enumerate(train_dataloader):
-            image=inputs['pixel_values']
-            labels1=inputs['label1']
-            labels2=inputs['label2']
-            # move to GPU
-            image = image.to(device)
-            labels1 = labels1.to(device) 
-            labels2 = labels2.to(device) 
-            # forward inputs and get output
-            pre_labels1,pre_labels2 = model(image)
-            _, preds1 = torch.max(pre_labels1, 1)
-            _, preds2 = torch.max(pre_labels2, 1)
-            loss1 = criterion1(pre_labels1,labels1)
-            loss2=criterion2(pre_labels2,labels2)
-            loss=loss1+loss2
+    
+    start_time = time.time()
+    
+    for epoch in range(num_epochs):
+        model.train()
+        running_loss = 0.0
+        running_corrects = 0
+        
+        for inputs in train_dataloader:
+            images = inputs['pixel_values'].to(device)
+            labels1 = inputs['label1'].to(device)
+            labels2 = inputs['label2'].to(device)
+            
+            optimizer.zero_grad()
+            outputs1, outputs2 = model(images)
+            loss1 = criterion1(outputs1, labels1)
+            loss2 = criterion2(outputs2, labels2)
+            loss = loss1 + loss2
             loss.backward()
             optimizer.step()
-            optimizer.zero_grad()
-            running_loss += loss.item() * image.size(0)
-            running_corrects += torch.sum(preds1 == labels1.data)
-            running_corrects += torch.sum(preds2 == labels2.data)
-
+            
+            _, preds1 = torch.max(outputs1, 1)
+            _, preds2 = torch.max(outputs2, 1)
+            
+            running_loss += loss.item() * images.size(0)
+            running_corrects += torch.sum(preds1 == labels1.data) + torch.sum(preds2 == labels2.data)
+        
         epoch_loss = running_loss / len(train_dataset)
-        epoch_acc = running_corrects / (len(train_dataset)*2) * 100.
-        current_time = datetime.datetime.now()
-        # writer.add_scalar('Training Loss', epoch_loss, epoch)
+        epoch_acc = running_corrects.double() / (2 * len(train_dataset)) * 100
+        
         writer.add_scalar('Training Loss', epoch_loss, epoch)
         writer.add_scalar('Training Accuracy', epoch_acc, epoch)
-        print('Current time: {} [Train #{}] Loss: {:.4f} Acc: {:.4f}% Time: {:.4f}s'.format(current_time,epoch, epoch_loss, epoch_acc, time.time() -start_time))
         
-        # """ valing Phase """
+        print(f"Epoch [{epoch}/{num_epochs}] Training Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}% Time: {time.time() - start_time:.4f}s")
+        
         model.eval()
+        val_loss = 0.0
+        val_corrects = 0
+        
         with torch.no_grad():
-            running_loss = 0.
-            running_corrects = 0
-            for index, inputs  in enumerate(val_dataloader):
-                image, labels1,labels2 = inputs['pixel_values'],inputs['label1'],inputs['label2']
-                image = image.to(device)
-                labels1= labels1.to(device)
-                labels2= labels2.to(device)
-                outputs1,outputs2 = model(image)
-                _, preds1 = torch.max(outputs1, 1)
-                _, preds2 = torch.max(outputs2, 1)
-    #
+            for inputs in val_dataloader:
+                images = inputs['pixel_values'].to(device)
+                labels1 = inputs['label1'].to(device)
+                labels2 = inputs['label2'].to(device)
+                
+                outputs1, outputs2 = model(images)
                 loss1 = criterion1(outputs1, labels1)
                 loss2 = criterion2(outputs2, labels2)
                 loss = loss1 + loss2
-                # 迄今为止的loss
-                running_loss += loss.item() * image.size(0)
-
-                running_corrects += torch.sum(preds1 == labels1.data)
-                running_corrects += torch.sum(preds2 == labels2.data)
-            # 当前dataset的平均loss for each item
-            epoch_loss = running_loss / len(val_dataset)
-            epoch_acc = running_corrects / (2*len(val_dataset))* 100
-            if epoch_loss < best_loss:
-                best_loss = epoch_loss
-                print('Best model found at epoch {} with loss: {}'.format(epoch, best_loss))
-                best_model = model.state_dict()
-            writer.add_scalar('Validation Loss', epoch_loss, epoch)
-            writer.add_scalar('Validation Accuracy', epoch_acc, epoch)
-            print('[Test #{}] Loss: {:.4f} Acc: {:.4f}% Time: {:.4f}s'.format(epoch, epoch_loss, epoch_acc, time.time()- start_time))
-    save_path = '/disk8t/jialiangfan/trained_models/{}.pth'.format(experiment_name)
+                
+                _, preds1 = torch.max(outputs1, 1)
+                _, preds2 = torch.max(outputs2, 1)
+                
+                val_loss += loss.item() * images.size(0)
+                val_corrects += torch.sum(preds1 == labels1.data) + torch.sum(preds2 == labels2.data)
+        
+        epoch_val_loss = val_loss / len(val_dataset)
+        epoch_val_acc = val_corrects.double() / (2 * len(val_dataset)) * 100
+        
+        writer.add_scalar('Validation Loss', epoch_val_loss, epoch)
+        writer.add_scalar('Validation Accuracy', epoch_val_acc, epoch)
+        
+        print(f"Validation Loss: {epoch_val_loss:.4f} Acc: {epoch_val_acc:.4f}%")
+        
+        if epoch_val_loss < best_loss:
+            best_loss = epoch_val_loss
+            best_model = model.state_dict()
+            print(f"Best model found at epoch {epoch} with loss: {best_loss:.4f}")
+    
+    save_path = f'/disk8t/jialiangfan/trained_models/{experiment_name}.pth'
     torch.save(best_model, save_path)
 
-
 if __name__ == '__main__':
-    args = read_args()
-    arugumentation = args.data_argumentation
-    print("data_argument",arugumentation)
-    print("num_epochs",args.num_epochs)
-    print("batch_size",args.batch_size)
-    # 0: ViT, 1: ResNet, 2:VGG16, 3:alexnet, 4:squeezenet, 5: ResNet34, 6: ResNet50,7:DenseNet
-    if args.model == 0:
-        print("model_type: Vision Transformer")
-    elif args.model == 1:
-        print("model_type: ResNet18")
-    elif args.model == 2:
-        print("model_type: Vgg16")
-    elif args.model == 3:
-        print("model_type: Alexnet")
-    elif args.model == 4:
-        print("model_type: SqueezeNet")
-    elif args.model == 5:
-        print("model_type: ResNet34")
-    elif args.model == 6:
-        print("model_type: ResNet50")
-    elif args.model == 7:
-        print("model_type: DenseNet")
-    
-    # elif model_type==8:
-    #     model=DualViT(num_class1=2,num_class2=4,pretrained=pretrained)
-    #     # vit base patch 32
-    # elif model_type==9:
-    #     model=DualViT(num_class1=2,num_class2=4,patch=32,pretrained=pretrained)
-    #     # vit large patch 16
-    # elif model_type==10:
-    #     model=DualViT(num_class1=2,num_class2=4,type='large', patch=16,pretrained=pretrained)
-    # # vit large patch 32
-    # elif model_type==11:
-    #     model=DualViT(num_class1=2,num_class2=4,type='large', patch=32,pretrained=pretrained)
-    # # vit huge patch 14
-    # elif model_type==12:
-    #     model=DualViT(num_class1=2,num_class2=4,type='huge',pretrained=pretrained)
-    
-    elif args.model == 8:
-        print("model_type: ViT_Base patch 16")
-    elif args.model == 9:
-        print("model_type: vit_base_patch32")
-    elif args.model == 10:
-        print("model_type: ViT_Large_patch16")
-    elif args.model == 11:
-        print("model_type: ViT_Large_patch32")
-    elif args.model == 12:
-        print("model_type: ViT_Huge_patch14")
-    elif args.model == 13:
-        print("model_type: ViT_base_MLP")
-    elif args.model == 14:
-        print("model_type: ViT_large_MLP")
-    elif args.model==15:
-        print("model_type: ViT Adapter")
-    print("pretrained",args.pretrained)
-    if args.optimizer_type == 0:
-        print("optimizer_type: SGD")
-    elif args.optimizer_type == 1:
-        print("optimizer_type: Adam")
-    elif args.optimizer_type == 2:
-        print("optimizer_type: AdamW")
-    print("optimizer_type",args.optimizer_type)
-    print("device",args.device)
+    args = argparse.parse_args()
+    print(f"Batch size: {args.batch_size}")
+    print(f"Learning rate: {args.learning_rate}")
+    print(f"Number of epochs: {args.num_epochs}")
+    print(f"Data augmentation: {args.data_augmentation}")
+    print(f"Using pretrained model: {args.pretrained}")
+    print(f"Optimizer type: {optimizer_types[args.optimizer_type]}")
+    print(f"Device: {device_types[args.device]}")
+    print(f"Model type: {model_types[args.model]}")
     train(num_epochs=args.num_epochs, data_argumentation=args.data_argumentation,batch_size=args.batch_size,
           model_type=args.model,pretrained=args.pretrained,optimizer_type=args.optimizer_type,device=args.device)
           

@@ -137,7 +137,7 @@ class MyDataset(Dataset):
         # return img,label
 
 
-data_dir='/home/jialiangfan/head_blood/dataset1/'
+data_dir='/home/jialiangfan/DTViT/dataset1/'
 
 train_dataset = MyDataset(data_dir,test_frac=0.15,section="training",data_augmentation=True)
 test_dataset=MyDataset(data_dir,test_frac=0.15,section="test",data_augmentation=True)
