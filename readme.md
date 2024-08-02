@@ -1,6 +1,15 @@
 # DTViT
 
 This repository contains the source code and data for the paper "Dual-Task Vision Transformer for Rapid and Accurate Intracerebral Hemorrhage CT Image Classification" published in  [arxiv_link](https://arxiv.org/abs/2405.06814).
+If you use this code in your research, please cite the following paper:
+```bib
+@article{fan2024dual,
+  title={Dual-Task Vision Transformer for Rapid and Accurate Intracerebral Hemorrhage CT Image Classification},
+  author={Jialiang Fan, Xinhui Fan, Chengyan Song, Xiaofan Wang, Bingdong Feng, Lucan Li, Guoyu Lu},
+  journal={arXiv preprint arXiv:2405.06814},
+  year={2024}
+}```
+
 
 ## Abstract
 
