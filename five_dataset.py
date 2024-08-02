@@ -9,6 +9,7 @@ from PIL import Image
 import os
 from torch import nn
 from torchvision.models import vit_b_16
+import matplotlib.pyplot as plt
 
 
 # class MyDataset(Dataset):
@@ -186,7 +187,24 @@ class MyDataset(Dataset):
         return {'pixel_values':image,'label1':has_tumor,'label2':tumor_type}
         # return image,has_tumor, tumor_type
 
+    def visual_transform(self, image):
+        first=transforms.Resize(256, image)
+        second=transforms.CenterCrop(224, first)
+        return first, second
 
 if __name__ == "__main__":
-    data_dir = '/home/jialiangfan/head_blood/dataset'
-    dataset = MyDataset(data_dir,balance=True)
+
+    data_dir = './dataset'
+    # data_list=generate_data_list(data_dir,balance=False)
+    # train_size=int(0.8*len(data_list))
+    # val_size=int(0.1*len(data_list))
+    # test_size=len(data_list)-train_size-val_size
+    # dataset = MyDataset(data_list,balance=False)
+    # image=dataset[0]
+    # print(image['pixel_values'].shape)
+    # data = np.transpose(image['pixel_values'], (1, 2, 0))
+
+    # plt.imshow(data)
+
+    # plt.imshow(image['pixel_values'])
+    # plot_image(image['pixel_values'])
