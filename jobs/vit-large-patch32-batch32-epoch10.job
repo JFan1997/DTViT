@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+#$ -q gpu
+#$ -l  hostname=qa-a10-034.crc.nd.edu,gpu_card=1
+#$ -M jfan5@nd.edu
+#$ -m abe
+#$ -N vit-large-patch16-batch32-epoch10-lr0.00002
+
+
+
+conda activate dtvit
+python3 main.py --data_augmentation  True --batch_size 32 --num_epochs 10 --model 11 --optimizer_type 3 --learning_rate 0.00002

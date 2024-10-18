@@ -2,4 +2,3 @@
 trained_models
 .DS_Store
 *.pyc 
-*.job
