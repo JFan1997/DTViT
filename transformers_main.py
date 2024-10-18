@@ -137,8 +137,8 @@ class MyDataset(Dataset):
         # return img,label
 
 
-data_dir='/home/jialiangfan/DTViT/dataset1/'
-
+current_file_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.join(current_file_dir, 'dataset')
 train_dataset = MyDataset(data_dir,test_frac=0.15,section="training",data_augmentation=True)
 test_dataset=MyDataset(data_dir,test_frac=0.15,section="test",data_augmentation=True)
 

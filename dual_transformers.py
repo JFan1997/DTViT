@@ -143,7 +143,12 @@ class MyDataset(Dataset):
 
 
 from torch.utils.data import random_split
-data_dir='/home/jialiangfan/DTViT/dataset/'
+
+
+current_file_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.join(current_file_dir, 'dataset')
+
+
 dataset=MyDataset(data_dir)
 train_size = int(0.8 * len(dataset))
 val_size = int(0.1*len(dataset))

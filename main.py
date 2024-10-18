@@ -23,7 +23,8 @@ from opt import model_types, optimizer_types, device_types,parser
 
 
 def load_dataset(data_augmentation=False): 
-    data_dir = '/home/jialiangfan/DTViT/dataset'
+    current_file_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(current_file_dir, 'dataset')
     data_list = generate_data_list(data_dir, balance=False)
     train_size = int(0.8 * len(data_list))
     val_size = int(0.1 * len(data_list))
