@@ -46,4 +46,3 @@ parser.add_argument('--pretrained', action='store_true', help='Use pretrained mo
 parser.add_argument('--optimizer_type', type=int, default=0, choices=optimizer_types.keys(), help=optimizer_help)
 parser.add_argument('--device', type=int, default=0, choices=device_types.keys(), help=device_help)
 parser.add_argument('--model', type=int, default=0, choices=model_types.keys(), help=model_help)
-
