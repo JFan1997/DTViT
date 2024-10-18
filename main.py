@@ -19,7 +19,7 @@ from models.squeezenet import DualSqueezeNet
 from models.densenet import DualDensenet
 from models.vgg import DualVgg16
 from models.vit_adapter import build_model
-from opt import model_types, optimizer_types, device_types
+from opt import model_types, optimizer_types, device_types,parser
 
 
 def load_dataset(data_augmentation=False): 
@@ -165,7 +165,8 @@ def train(num_epochs=50, data_augmentation=False, batch_size=8, model_type=0, pr
     torch.save(best_model, save_path)
 
 if __name__ == '__main__':
-    args = argparse.parse_args()
+    # args = argparse.parse_args()
+    args=parser.parse_args()
     print(f"Batch size: {args.batch_size}")
     print(f"Learning rate: {args.learning_rate}")
     print(f"Number of epochs: {args.num_epochs}")
