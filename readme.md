@@ -40,6 +40,11 @@ To set up the environment for this project, please follow these steps:
     ```bash
     conda env create -f environment.yml
     ```
+    or 
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 3. Activate the conda environment:
     ```bash
