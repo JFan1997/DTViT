@@ -10,4 +10,4 @@
 
 
 conda activate dtvit
-python3 main.py --data_augmentation  True --batch_size 32 --num_epochs 10 --model 11 --optimizer_type 3 --learning_rate 0.00002
+python3 main.py --data_augmentation  True --batch_size 32 --num_epochs 10 --model 11 --optimizer_type 2 --learning_rate 0.00002
