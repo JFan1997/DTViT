@@ -162,7 +162,7 @@ def train(num_epochs=50, data_augmentation=False, batch_size=8, model_type=0, pr
             best_model = model.state_dict()
             print(f"Best model found at epoch {epoch} with loss: {best_loss:.4f}")
     
-    save_path = f'/disk8t/jialiangfan/trained_models/{experiment_name}.pth'
+    save_path = f'./trained_models/{experiment_name}.pth'
     torch.save(best_model, save_path)
 
 if __name__ == '__main__':
