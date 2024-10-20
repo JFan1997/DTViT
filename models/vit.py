@@ -21,40 +21,6 @@ from torchsummary import summary
 from torchvision.ops.misc import Conv2dNormActivation
 from torchvision.models import vit_b_16, vit_l_16, vit_h_14, vit_b_32,vit_l_32,ViT_H_14_Weights
 
-
-
-# class MLPBlock(nn.Module):
-#     def __init__(self, dim, hidden_dim, out_dim, drop=0.):
-#         super().__init__()
-#         self.fc1 = nn.Linear(dim, hidden_dim)
-#         self.act = nn.GELU()
-#         self.fc2 = nn.Linear(hidden_dim, out_dim)
-#         self.drop = nn.Dropout(drop)
-
-#     def forward(self, x):
-#         x = self.fc1(x)
-#         x = self.act(x)
-#         x = self.drop(x)
-#         x = self.fc2(x)
-#         x = self.drop(x)
-#         return x
-
-# class ViTWithMLPHead(nn.Module):
-    # def __init__(self, hidden_dim, mlp_dim=256, num_classes=2):
-    #     super(ViTWithMLPHead, self).__init__()
-    #     # 假设ViT的模型部分已经定义在这里或作为预训练模型加载
-    #     self.mlp = nn.Sequential(
-    #         nn.Linear(hidden_dim, mlp_dim),
-    #         nn.ReLU(),
-    #         nn.Dropout(0.1),
-    #         nn.Linear(mlp_dim, num_classes)
-    #     )
-        
-    # def forward(self, x):
-    #     # 通过MLP头部进行分类
-    #     x = self.mlp(x)
-    #     return x
-
 class DualViT(nn.Module):
     """Vision Transformer as per https://arxiv.org/abs/2010.11929."""
 

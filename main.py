@@ -17,8 +17,10 @@ from models.alexnet import DualAlexnet
 from models.resnet18 import DualResNet
 from models.squeezenet import DualSqueezeNet
 from models.densenet import DualDensenet
+from models.dualCVT import CvtForDualClassification
 from models.vgg import DualVgg16
 from models.vit_adapter import build_model
+from transformers import CvtPreTrainedModel, CvtModel, CvtConfig
 from opt import model_types, optimizer_types, device_types,parser
 
 
@@ -54,7 +56,8 @@ def select_model(model_type, pretrained):
         12: lambda: DualViT(num_class1=2, num_class2=4, type='huge', pretrained=pretrained),
         13: lambda: DualViT(num_class1=2, num_class2=4, type='base', pretrained=pretrained, MLP=True),
         14: lambda: DualViT(num_class1=2, num_class2=4, type='large', pretrained=pretrained, MLP=True),
-        15: build_model
+        15: build_model,
+        16: lambda: CvtForDualClassification(config=CvtConfig.from_pretrained("microsoft/cvt-13"))
     }
     
     return model_classes[model_type]()

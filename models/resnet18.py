@@ -37,5 +37,6 @@ if __name__ == "__main__":
     # print(model)
     input = torch.randn(1, 3, 224, 224)
     output = model(input)
+    print(output)
     print(output[0].shape, output[1].shape)
 
