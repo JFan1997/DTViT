@@ -2,10 +2,11 @@
 
 
 #$ -q gpu
-#$ -l  hostname=qa-a10-023.crc.nd.edu,gpu_card=0
 #$ -M jfan5@nd.edu
 #$ -m abe
 #$ -N baseline
+#$ -l gpu_card=1
+
 
 
 conda activate dtvit

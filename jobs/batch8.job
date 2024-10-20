@@ -2,7 +2,7 @@
 
 
 #$ -q gpu
-#$ -l  hostname=qa-a10-023.crc.nd.edu,gpu_card=2
+#$ -l  gpu_card=1
 #$ -M jfan5@nd.edu
 #$ -m abe
 #$ -N batch8

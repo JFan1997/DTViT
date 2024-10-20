@@ -2,7 +2,7 @@
 
 
 #$ -q gpu
-#$ -l  hostname=qa-a10-027.crc.nd.edu,gpu_card=0
+#$ -l gpu_card=0
 #$ -M jfan5@nd.edu
 #$ -m abe
 #$ -N lr510e6
