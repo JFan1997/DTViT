@@ -11,7 +11,7 @@ class CvtForDualClassification(CvtPreTrainedModel):
         self.num_labels_task1 = 2  # 第一个分类任务的类别数量
         self.num_labels_task2 = 4  # 第二个分类任务的类别数量
         # self.cvt = CvtModel(config, add_pooling_layer=False)
-        self.cvt=CvtModel.from_pretrained("microsoft/cvt-21-384-22k")
+        self.cvt=CvtModel.from_pretrained("microsoft/cvt-13-384-22k")
         self.layernorm = nn.LayerNorm(config.embed_dim[-1])
 
         # 两个分类器头
@@ -72,7 +72,7 @@ class CvtForDualClassification(CvtPreTrainedModel):
         )
 
 if __name__ == "__main__":
-    config = CvtConfig.from_pretrained("microsoft/cvt-21-384-22k")
+    config = CvtConfig.from_pretrained("microsoft/cvt-13-384-22k")
 
     model = CvtForDualClassification(config)
     # print(model)

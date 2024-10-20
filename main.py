@@ -57,7 +57,7 @@ def select_model(model_type, pretrained):
         13: lambda: DualViT(num_class1=2, num_class2=4, type='base', pretrained=pretrained, MLP=True),
         14: lambda: DualViT(num_class1=2, num_class2=4, type='large', pretrained=pretrained, MLP=True),
         15: build_model,
-        16: lambda: CvtForDualClassification(config=CvtConfig.from_pretrained("microsoft/cvt-21-384-22k"))
+        16: lambda: CvtForDualClassification(config=CvtConfig.from_pretrained("microsoft/cvt13-384-22k"))
     }
     
     return model_classes[model_type]()
