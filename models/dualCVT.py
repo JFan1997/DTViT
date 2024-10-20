@@ -71,7 +71,7 @@ class CvtForDualClassification(CvtPreTrainedModel):
         )
 
 if __name__ == "__main__":
-    config = CvtConfig.from_pretrained("microsoft/cvt-13")
+    config = CvtConfig.from_pretrained("microsoft/cvt-13-384-22k")
 
     model = CvtForDualClassification(config)
     # print(model)
