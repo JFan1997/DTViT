@@ -2,7 +2,6 @@
 
 
 #$ -q gpu
-#$ -l  hostname=qa-a10-027.crc.nd.edu,gpu_card=2
 #$ -M jfan5@nd.edu
 #$ -m abe
 #$ -N patch32
@@ -10,4 +9,4 @@
 
 
 conda activate dtvit
-python3 main.py --model 11 --device 2
+python3 main.py --model 11
