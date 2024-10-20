@@ -145,8 +145,11 @@ def train(num_epochs=50, data_augmentation=False, batch_size=8, model_type=0, pr
                 images = inputs['pixel_values'].to(device)
                 labels1 = inputs['label1'].to(device)
                 labels2 = inputs['label2'].to(device)
-                
-                outputs1, outputs2 = model(images)
+                # outputs1, outputs2 = model(images)
+                if model_type == 16:
+                    output = model(images)
+                    outputs1 = output.logits[0]
+                    outputs2 = output.logits[1]
                 loss1 = criterion1(outputs1, labels1)
                 loss2 = criterion2(outputs2, labels2)
                 loss = loss1 + loss2
