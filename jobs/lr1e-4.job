@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+#$ -q gpu
+#$ -l gpu_card=1
+#$ -m abe
+#$ -N lr1e-4
+
+
+conda activate dtvit
+python3 main.py --learning_rate 0.0001

@@ -160,6 +160,8 @@ def train(num_epochs, data_augmentation, batch_size, model_type, pretrained, opt
                     output = model(images)
                     outputs1 = output.logits[0]
                     outputs2 = output.logits[1]
+                else:
+                    outputs1, outputs2 = model(images)
                 loss1 = criterion1(outputs1, labels1)
                 loss2 = criterion2(outputs2, labels2)
                 loss = loss1 + loss2
