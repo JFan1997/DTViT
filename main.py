@@ -189,5 +189,5 @@ if __name__ == '__main__':
     print(f"Device: {device_types[args.device]}")
     print(f"Model type: {model_types[args.model]}")
     train(num_epochs=args.num_epochs, data_augmentation=args.data_augmentation,batch_size=args.batch_size,
-          model_type=args.model,pretrained=args.pretrained,optimizer_type=args.optimizer_type,device=args.device)
+          model_type=args.model,pretrained=args.pretrained,optimizer_type=args.optimizer_type,device=args.device,learning_rate=args.learning_rate)
           
