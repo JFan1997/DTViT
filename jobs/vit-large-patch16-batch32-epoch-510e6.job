@@ -5,7 +5,7 @@
 #$ -l  hostname=qa-a10-027.crc.nd.edu,gpu_card=1
 #$ -M jfan5@nd.edu
 #$ -m abe
-#$ -N vit-large-patch16-batch8-epoch10
+#$ -N vit-large-patch16-batch32-epoch10
 
 
 conda activate dtvit
