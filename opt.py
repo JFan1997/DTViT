@@ -17,7 +17,8 @@ model_types = {
     12: "ViT_Huge patch 14",
     13: "ViT_base_MLP",
     14: "ViT_large_MLP",
-    15: "ViT Adapter"
+    15: "ViT Adapter",
+    16: "CVT",
 }
 
 optimizer_types = {
