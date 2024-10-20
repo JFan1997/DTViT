@@ -2,11 +2,11 @@
 
 
 #$ -q gpu
-#$ -l  hostname=qa-a10-027.crc.nd.edu,gpu_card=1
+#$ -l  hostname=qa-a10-023.crc.nd.edu,gpu_card=2
 #$ -M jfan5@nd.edu
 #$ -m abe
 #$ -N batch8
 
 
 conda activate dtvit
-python3 main.py --data_augmentation  True --pretrained --batch_size 8 --num_epochs 10  --model 10 --optimizer_type 2 --learning_rate 0.00002
+python3 main.py   --batch_size 8 --device 2

@@ -44,6 +44,6 @@ parser.add_argument('--learning_rate', type=float, default=0.00002, help='Learni
 parser.add_argument('--num_epochs', type=int, default=10, help='Number of epochs for training')
 parser.add_argument('--data_augmentation', type=bool, default=True, help='Use data augmentation or not')
 parser.add_argument('--pretrained', type=bool, default=True, help='Use pretrained model or not')
-parser.add_argument('--optimizer_type', type=int, default=0, choices=optimizer_types.keys(), help=optimizer_help)
+parser.add_argument('--optimizer_type', type=int, default=2, choices=optimizer_types.keys(), help=optimizer_help)
 parser.add_argument('--device', type=int, default=0, choices=device_types.keys(), help=device_help)
 parser.add_argument('--model', type=int, default=10, choices=model_types.keys(), help=model_help)

@@ -2,12 +2,12 @@
 
 
 #$ -q gpu
-#$ -l  hostname=qa-a10-023.crc.nd.edu,gpu_card=2
+#$ -l  hostname=qa-a10-027.crc.nd.edu,gpu_card=2
 #$ -M jfan5@nd.edu
 #$ -m abe
-#$ -N vit-large-patch16-batch32-epoch10-lr0.00002
+#$ -N patch32
 
 
 
 conda activate dtvit
-python3 main.py --data_augmentation  True --batch_size 32 --pretrained --num_epochs 10 --model 11 --optimizer_type 2 --learning_rate 0.00002
+python3 main.py --patch_size 32 --device 2
