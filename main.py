@@ -63,15 +63,24 @@ def select_model(model_type, pretrained):
     return model_classes[model_type]()
 
 
-def get_optimizer(optimizer_type, model):
+def get_optimizer(optimizer_type, model,lr):
     if optimizer_type == 0:
         return optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
     elif optimizer_type == 1:
         return optim.Adam(model.parameters(), lr=0.1)
     elif optimizer_type == 2:
-        return optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0.01)
+        return optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
 
 def train(num_epochs, data_augmentation, batch_size, model_type, pretrained, optimizer_type, device,learning_rate):
+    print(f"Training model with the following parameters:")
+    print(f"Number of epochs: {num_epochs}")
+    print(f"Data augmentation: {data_augmentation}")
+    print(f"Batch size: {batch_size}")
+    print(f"Model type: {model_types[model_type]}")
+    print(f"Using pretrained model: {pretrained}")
+    print(f"Optimizer type: {optimizer_types[optimizer_type]}")
+    print(f"Device: {device_types[device]}")
+    print(f"Learning rate: {learning_rate}")
     device = torch.device(f'cuda:{device}' if torch.cuda.is_available() else 'cpu')
     experiment_name = f"dataset-epoch_{num_epochs}-model_type_{model_type}-pretrained_{pretrained}-augmentation_{data_augmentation}-batch_size_{batch_size}-optimizer_type-{optimizer_type}"
     writer = SummaryWriter(f'./runs/{experiment_name}/')
@@ -88,7 +97,7 @@ def train(num_epochs, data_augmentation, batch_size, model_type, pretrained, opt
         for n, value in model.image_encoder.named_parameters(): 
             value.requires_grad = "Adapter" in n
            
-    optimizer = get_optimizer(optimizer_type, model)
+    optimizer = get_optimizer(optimizer_type, model,lr=learning_rate)
     
     criterion1 = nn.CrossEntropyLoss()
     criterion2 = nn.CrossEntropyLoss()
@@ -190,4 +199,6 @@ if __name__ == '__main__':
     print(f"Model type: {model_types[args.model]}")
     train(num_epochs=args.num_epochs, data_augmentation=args.data_augmentation,batch_size=args.batch_size,
           model_type=args.model,pretrained=args.pretrained,optimizer_type=args.optimizer_type,device=args.device,learning_rate=args.learning_rate)
-          
+    
+# num_epochs, data_augmentation, batch_size, model_type, pretrained, optimizer_type, device,learning_rate
+
