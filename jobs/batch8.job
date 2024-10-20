@@ -9,4 +9,4 @@
 
 
 conda activate dtvit
-python3 main.py   --batch_size 8 --device 2
+python3 main.py   --batch_size 8

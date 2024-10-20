@@ -9,4 +9,4 @@
 
 
 conda activate dtvit
-python3 main.py --learning_rate 0.01 --device 1
+python3 main.py --learning_rate 0.01 
