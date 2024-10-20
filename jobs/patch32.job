@@ -10,4 +10,4 @@
 
 
 conda activate dtvit
-python3 main.py --patch_size 32 --device 2
+python3 main.py --model 11 --device 2
