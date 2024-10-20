@@ -5,8 +5,7 @@
 #$ -M jfan5@nd.edu
 #$ -m abe
 #$ -N patch32
-
-
+#$ -l gpu_card=1
 
 conda activate dtvit
 python3 main.py --model 11
