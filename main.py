@@ -72,7 +72,7 @@ def get_optimizer(optimizer_type, model):
         return optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0.01)
 
 
-def train(num_epochs=50, data_augmentation=False, batch_size=8, model_type=0, pretrained=True, optimizer_type=0, device=2,learning_rate=0.01):
+def train(num_epochs, data_augmentation, batch_size, model_type, pretrained, optimizer_type, device,learning_rate):
     device = torch.device(f'cuda:{device}' if torch.cuda.is_available() else 'cpu')
     experiment_name = f"dataset-epoch_{num_epochs}-model_type_{model_type}-pretrained_{pretrained}-augmentation_{data_augmentation}-batch_size_{batch_size}-optimizer_type-{optimizer_type}"
     writer = SummaryWriter(f'./runs/{experiment_name}/')

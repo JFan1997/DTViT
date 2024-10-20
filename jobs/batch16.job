@@ -5,8 +5,8 @@
 #$ -l  hostname=qa-a10-025.crc.nd.edu,gpu_card=0
 #$ -M jfan5@nd.edu
 #$ -m abe
-#$ -N batch48
+#$ -N batch16
 
 
 conda activate dtvit
-python3 main.py   --batch_size 48
+python3 main.py   --batch_size 16
