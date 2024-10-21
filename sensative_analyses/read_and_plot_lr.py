@@ -41,23 +41,20 @@ def read_and_plot(filename,lr):
     # 设置字体属性
     font_dict = {'family': 'Times New Roman', 'size': 15}
     plt.figure(figsize=(7, 5))
-    font_dict={'family':'Times New Roman','size':15}
 
 
-
-    # train_epochs = [int(epoch)+1 for epoch in train_epochs]
-    # test_epochs = [int(epoch)+1 for epoch in test_epochs]
-
-    sns.lineplot(df['Training Loss'],label="training loss",  linewidth=2.5, linestyle='-', marker='o', markersize=8, color='blue')  # 使用 seaborn 的 lineplot
-    sns.lineplot(df['Validation Loss'],label="validating loss", linewidth=2.5,linestyle='--', marker='s', markersize=8, color='orange')  # 使用 seaborn 的 lineplot
-    plt.title(title,fontdict=font_dict)
+    sns.lineplot(df['Training Loss'],label="Training Loss",  linewidth=2.5, linestyle='-', marker='o', markersize=8, color='blue')  # 使用 seaborn 的 lineplot
+    sns.lineplot(df['Validation Loss'],label="Validation Loss", linewidth=2.5,linestyle='--', marker='s', markersize=8, color='orange')  # 使用 seaborn 的 lineplot
+    plt.title('Training and Validation Loss Over Epochs (Learning Rate: {})'.format(lr),fontdict=font_dict)
 
     plt.xlabel('Epoch',fontdict=font_dict)
     plt.ylabel('Loss',fontdict=font_dict)
+    if lr==0.0001 or lr==5e-06:
+        plt.ylim(0, 0.5)
     plt.legend(prop=font_dict)
     plt.tick_params(axis='both', labelsize=font_dict['size'])  # 设置坐标轴刻度标签的字体属性
     plt.savefig('loss-{}.png'.format(lr),dpi=400,bbox_inches='tight')
-    plt.show()
+    # plt.show()
     # Plotting the loss curves
     # plt.figure(figsize=(10, 6))
     # plt.plot(df['Training Loss'], label='Training Loss', marker='o')
@@ -71,21 +68,27 @@ def read_and_plot(filename,lr):
     # plt.show()
 
     # Plotting the accuracy curves
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(7, 5))
 
-    plt.plot(df['Training Acc'], label='Training Accuracy', marker='o')
-    plt.plot(df['Validation Acc'], label='Validation Accuracy', marker='s')
-    plt.title('Training and Validation Accuracy Over Epochs (Learning Rate: {})'.format(lr))
+    sns.lineplot(df['Training Acc'],label="Training Accuracy",  linewidth=2.5, linestyle='-', marker='o', markersize=8, color='blue')  # 使用 seaborn 的 lineplot
+    sns.lineplot(df['Validation Acc'],label="Validation Accuracy", linewidth=2.5,linestyle='--', marker='s', markersize=8, color='orange')  # 使用 seaborn 的 lineplot
+    font_dict = {'family': 'Times New Roman', 'size': 15}
+
+
+    plt.title('Training and Validation Accuracy Over Epochs (Learning Rate: {})'.format(lr),fontdict=font_dict)
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy (%)')
-    plt.legend()
-    plt.savefig('accuracy-{}.png'.format(lr))
+    if lr==0.0001 or lr==5e-06:
+        plt.ylim(90, 100)
+    plt.legend(prop=font_dict)
+    plt.savefig('accuracy-{}.png'.format(lr),dpi=400,bbox_inches='tight')
+
+    # plt.savefig('accuracy-{}.png'.format(lr))
     # plt.show()
 
 if __name__ == "__main__":
-    read_and_plot("vit-large-patch16-batch32-epoch10-lr0.001.o892229",lr=0.001)
-    read_and_plot("vit-large-patch16-batch32-epoch10.o892228",lr=2e-05)
-    read_and_plot("baseline.out",lr=22)
-    read_and_plot("lr0.01",lr=0.01)
-    read_and_plot("batch8",lr=0.008)
+    read_and_plot("lr0.001-A10",lr=1e-03)
+    read_and_plot("lr0.0001-A10",lr=1e-04)
+    read_and_plot("lr5e-6-A10",lr=5e-06)
+    read_and_plot("baseline",lr=2e-05)
 

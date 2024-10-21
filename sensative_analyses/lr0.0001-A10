@@ -1,0 +1,25 @@
+Epoch [0/10] Training Loss: 0.4599 Acc: 91.8528% Time: 448.5678s
+Validation Loss: 0.2635 Acc: 95.0593%
+Best model found at epoch 0 with loss: 0.2635
+Epoch [1/10] Training Loss: 0.2586 Acc: 95.4743% Time: 890.2086s
+Validation Loss: 0.1800 Acc: 96.4822%
+Best model found at epoch 1 with loss: 0.1800
+Epoch [2/10] Training Loss: 0.1994 Acc: 96.6057% Time: 1331.8772s
+Validation Loss: 0.1397 Acc: 97.6285%
+Best model found at epoch 2 with loss: 0.1397
+Epoch [3/10] Training Loss: 0.1817 Acc: 96.8231% Time: 1773.5432s
+Validation Loss: 0.1697 Acc: 96.9170%
+Epoch [4/10] Training Loss: 0.1580 Acc: 97.1690% Time: 2213.2360s
+Validation Loss: 0.1561 Acc: 97.3913%
+Epoch [5/10] Training Loss: 0.1199 Acc: 97.9545% Time: 2653.8994s
+Validation Loss: 0.1219 Acc: 97.8261%
+Best model found at epoch 5 with loss: 0.1219
+Epoch [6/10] Training Loss: 0.1203 Acc: 97.8607% Time: 3095.4404s
+Validation Loss: 0.1327 Acc: 97.3123%
+Epoch [7/10] Training Loss: 0.1062 Acc: 98.0484% Time: 3537.3143s
+Validation Loss: 0.1559 Acc: 97.7075%
+Epoch [8/10] Training Loss: 0.0845 Acc: 98.5771% Time: 3978.8128s
+Validation Loss: 0.1155 Acc: 97.9447%
+Best model found at epoch 8 with loss: 0.1155
+Epoch [9/10] Training Loss: 0.1032 Acc: 98.2312% Time: 4419.4147s
+Validation Loss: 0.1517 Acc: 97.3913%
