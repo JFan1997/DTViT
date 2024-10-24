@@ -1,0 +1,3 @@
+*.pth
+trained_models
+.DS_Store
